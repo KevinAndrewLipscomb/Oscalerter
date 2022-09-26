@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "OscalertSvc": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}
