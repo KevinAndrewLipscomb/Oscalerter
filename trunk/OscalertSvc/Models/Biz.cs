@@ -1,4 +1,5 @@
-﻿using OscalertSvc.Data;
+﻿using Class_biz_cad_activity_notification_agent;
+using OscalertSvc.Scrape;
 using System.Configuration;
 
 namespace OscalertSvc.Models
@@ -9,11 +10,11 @@ namespace OscalertSvc.Models
   public class Biz
     {
 
-    private static readonly ClassOneMysqlDb classOneMysqlDb = new();
+    static readonly private TClass_ss_imagetrendelite ss_cad_provider = new();
 
-    public ClassOneBiz classOne = new
+    public TClass_biz_cad_activity_notification_agent cad_activity_notification_agent = new
       (
-      classOneDb_imp:classOneMysqlDb,
+      ss_cad_provider_imp:ss_cad_provider,
       appSettings_imp:ConfigurationManager.AppSettings
       );
 

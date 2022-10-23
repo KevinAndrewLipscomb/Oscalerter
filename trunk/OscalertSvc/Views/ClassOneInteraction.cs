@@ -3,6 +3,7 @@ using log4net;
 using log4net.Config;
 using System;
 using System.Collections.Generic;
+using kix;
 
 namespace OscalertSvc.Views
   {
@@ -13,8 +14,8 @@ namespace OscalertSvc.Views
 
     private static readonly ILog log = LogManager.GetLogger(typeof(ClassOneInteraction));
     private bool BeUsingProgressWriteLines = false;
-    private string parameterOne;
-    private string parameterTwo;
+    //private string parameterOne;
+    //private string parameterTwo;
     private readonly List<ConsoleKey> quitKeyList = new()
       {
       ConsoleKey.Enter,
@@ -23,8 +24,8 @@ namespace OscalertSvc.Views
       ConsoleKey.Spacebar
       };
 
-    public string ParameterOne {get => parameterOne;}
-    public string ParameterTwo {get => parameterTwo;}
+    //public string ParameterOne {get => parameterOne;}
+    //public string ParameterTwo {get => parameterTwo;}
 
     public event EventHandler OnQuitCommanded;
     protected virtual void ReportQuitCommanded() => OnQuitCommanded?.Invoke(this,null);
@@ -33,17 +34,17 @@ namespace OscalertSvc.Views
       {
       XmlConfigurator.Configure(); // reads log4net configuration
       //
-      Console.Write("Please enter a value for parameterOne: ");
-      parameterOne = Console.ReadLine();
-      Console.Write("Please enter a value for parameterTwo: ");
-      parameterTwo = Console.ReadLine();
+      //Console.Write("Please enter a value for parameterOne: ");
+      //parameterOne = Console.ReadLine();
+      //Console.Write("Please enter a value for parameterTwo: ");
+      //parameterTwo = Console.ReadLine();
       //
       var message = "To quit, press any of ";
       foreach (var quitKey in quitKeyList)
         {
-        message += $"{quitKey}|";
+        message += $"{quitKey}{k.SPACE}|{k.SPACE}";
         }
-      Console.WriteLine($"{message.TrimEnd('|')}.");
+      Console.WriteLine(message.TrimEnd(new char[] {'|',k.SPACE[0]}));
       //
       if (BeQuitKeyPressed()) ReportQuitCommanded();
       }
