@@ -1,9 +1,21 @@
-﻿using System;
+﻿using ki.mvc;
+using System;
 
 namespace OscalertSvc.Models
   {
   public abstract class ObjectBiz
     {
+
+    public ObjectBiz() // CONSTRUCTOR
+      {
+      Report = new()
+        {
+        Debug = ReportDebug,
+        Warning = ReportWarning,
+        Error = ReportError,
+        Failure = ReportFailure
+        };
+      }
 
     protected bool BeQuitCommanded = false;
     //
@@ -23,6 +35,8 @@ namespace OscalertSvc.Models
     protected virtual void ReportWarning(string text) => OnWarning?.Invoke(this,text);
     protected virtual void ReportError(string text) => OnError?.Invoke(this,text);
     protected virtual void ReportFailure(string text) => OnFailure?.Invoke(this,text);
+
+    protected ReportClass Report;
 
     public void Quit(object sender, System.EventArgs e)
       {

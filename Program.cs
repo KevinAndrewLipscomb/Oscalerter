@@ -28,7 +28,7 @@ namespace OscalertSvc
         // running as console app
         //
         classOneInteraction = new ClassOneInteraction();
-        classOneInteraction.OnQuitCommanded += biz.classOne.Quit;
+        classOneInteraction.OnQuitCommanded += biz.cad_activity_notification_agent.Quit;
           // An Interaction acts as a VIEW.  If any parameters are needed in addition to the command line args, the Interaction's
           // constructor prompts the user for, and returns, such parameters.  An Interaction used by the controller inside a loop
           // must also expose BeQuitCommanded.
@@ -57,18 +57,14 @@ namespace OscalertSvc
       // Wire up the view to observe the model and execute the business processing.
       //
       //--
-      biz.classOne.OnProgress += classOneInteraction.ShowProgress;
-      biz.classOne.OnCompletion += classOneInteraction.ShowCompletion;
-      biz.classOne.OnDebug += classOneInteraction.ShowDebug;
-      biz.classOne.OnWarning += classOneInteraction.ShowWarning;
-      biz.classOne.OnError += classOneInteraction.ShowError;
-      biz.classOne.OnFailure += classOneInteraction.ShowFailure;
+      biz.cad_activity_notification_agent.OnProgress += classOneInteraction.ShowProgress;
+      biz.cad_activity_notification_agent.OnCompletion += classOneInteraction.ShowCompletion;
+      biz.cad_activity_notification_agent.OnDebug += classOneInteraction.ShowDebug;
+      biz.cad_activity_notification_agent.OnWarning += classOneInteraction.ShowWarning;
+      biz.cad_activity_notification_agent.OnError += classOneInteraction.ShowError;
+      biz.cad_activity_notification_agent.OnFailure += classOneInteraction.ShowFailure;
       //
-      biz.classOne.Process // Perform this class of processing.
-        (
-        parameterOne:classOneInteraction.ParameterOne,
-        parameterTwo:classOneInteraction.ParameterTwo
-        );
+      biz.cad_activity_notification_agent.Work();
       }
 
     static private void Stop()

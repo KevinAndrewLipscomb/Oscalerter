@@ -3,9 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32630.194
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OscalertSvc", "OscalertSvc.csproj", "{F9967F74-1D5D-4EC8-BCF3-6BAA267128BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OscalertSvc", "OscalertSvc.csproj", "{F9967F74-1D5D-4EC8-BCF3-6BAA267128BB}"
 	ProjectSection(ProjectDependencies) = postProject
 		{A20C347B-5154-47B9-A275-36157BF73352} = {A20C347B-5154-47B9-A275-36157BF73352}
+		{24557AC7-3C17-4149-9A5D-E920A4C5A0E5} = {24557AC7-3C17-4149-9A5D-E920A4C5A0E5}
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{82CB75CF-779C-421D-ADC7-708143E0F097}"
@@ -14,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ki", "..\..\..\SANDBOX\kveo-it-project\foundation\dotnet\ki\ki.csproj", "{A20C347B-5154-47B9-A275-36157BF73352}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "oscalib", "..\..\..\SANDBOX\kveo-it-project\oscalib\oscalib.csproj", "{24557AC7-3C17-4149-9A5D-E920A4C5A0E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +32,10 @@ Global
 		{A20C347B-5154-47B9-A275-36157BF73352}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A20C347B-5154-47B9-A275-36157BF73352}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A20C347B-5154-47B9-A275-36157BF73352}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24557AC7-3C17-4149-9A5D-E920A4C5A0E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24557AC7-3C17-4149-9A5D-E920A4C5A0E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24557AC7-3C17-4149-9A5D-E920A4C5A0E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24557AC7-3C17-4149-9A5D-E920A4C5A0E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
