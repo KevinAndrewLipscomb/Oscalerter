@@ -71,7 +71,8 @@ namespace OscalertSvc.Views
     public void ShowProgress
       (
       object source,
-      ClassOneBiz.EventArgs e)
+      ClassOneBiz.EventArgs e
+      )
       {
       Console.Write($"{e.content}");
       //Console.WriteLine($"{e.content}");

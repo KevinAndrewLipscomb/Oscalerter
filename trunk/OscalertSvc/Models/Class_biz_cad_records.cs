@@ -1,7 +1,7 @@
 // Derived from KiAspdotnetFramework/component/biz/Class~biz~~template~kicrudhelped~item.cs~template
 
-using Class_biz_incident_nature_translations;
 using Class_db_cad_records;
+using MySql.Data.MySqlClient;
 using OscalertSvc.Models;
 using System;
 
@@ -10,13 +10,15 @@ namespace Class_biz_cad_records
   public class TClass_biz_cad_records : ObjectBiz
     {
 
-    private readonly TClass_biz_incident_nature_translations biz_incident_nature_translations = null;
-    private readonly TClass_db_cad_records db_cad_records = null;
+    private readonly TClass_db_cad_records db_cad_records;
 
-    public TClass_biz_cad_records() : base()
+    public TClass_biz_cad_records
+      (
+      TClass_db_cad_records db_cad_records_imp
+      )
+      : base()
       {
-      biz_incident_nature_translations = new TClass_biz_incident_nature_translations();
-      db_cad_records = new TClass_db_cad_records();
+      db_cad_records = db_cad_records_imp;
       }
 
     internal void Augment()
@@ -24,10 +26,14 @@ namespace Class_biz_cad_records
       db_cad_records.Augment();
       }
 
-    internal string LocalRenditionOf(string nature)
+    internal string LocalRenditionOf
+      (
+      Biz biz,
+      string nature
+      )
       {
       var active_case_board_rendition_of = nature;
-      var local_rendition = biz_incident_nature_translations.LocalOfForeign(nature);
+      var local_rendition = biz.incident_nature_translations.LocalOfForeign(nature);
       if (local_rendition.Length > 0)
         {
         active_case_board_rendition_of = local_rendition;
@@ -93,23 +99,55 @@ namespace Class_biz_cad_records
       string nature
       )
       {
-      db_cad_records.Set
-        (
-        id,
-        incident_date,
-        incident_num,
-        incident_address,
-        call_sign,
-        time_initialized,
-        time_of_alarm,
-        time_enroute,
-        time_on_scene,
-        time_transporting,
-        time_at_hospital,
-        time_available,
-        time_downloaded,
-        nature
-        );
+      try
+        {
+        db_cad_records.Set
+          (
+          id,
+          incident_date,
+          incident_num,
+          incident_address,
+          call_sign,
+          time_initialized,
+          time_of_alarm,
+          time_enroute,
+          time_on_scene,
+          time_transporting,
+          time_at_hospital,
+          time_available,
+          time_downloaded,
+          nature,
+          incident_date_parse_format:"%Y-%m-%d" // the dominant format used by the provider
+          );
+        }
+      catch (MySqlException e)
+        {
+        if (e.Message.Contains("Incorrect datetime value")) 
+          {
+          db_cad_records.Set
+            (
+            id,
+            incident_date,
+            incident_num,
+            incident_address,
+            call_sign,
+            time_initialized,
+            time_of_alarm,
+            time_enroute,
+            time_on_scene,
+            time_transporting,
+            time_at_hospital,
+            time_available,
+            time_downloaded,
+            nature,
+            incident_date_parse_format:"%m/%d/%Y" // the format used by the provider occassionally, for unknown reasons
+            );
+          }
+        else
+          {
+          throw e;
+          }
+        }
       }
 
     public object Summary(string id)
