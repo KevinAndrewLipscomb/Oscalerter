@@ -135,15 +135,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
+    <None Include="App.config" />
     <None Include="config\dev\OscalertSvc.exe.config" />
     <None Include="config\dev\template-unpublished.config-template" />
     <None Include="config\production\OscalertSvc.exe.config" />
+    <None Include="config\production\run-as-admin-to-start-as-a-win7-service.cmd" />
     <None Include="config\production\template-unpublished.config-template" />
     <None Include="config\x\OscalertSvc.exe.config" />
+    <None Include="config\x\run-as-admin-to-start-as-a-win7-service.cmd" />
     <None Include="config\x\template-unpublished.config-template" />
     <None Include="packages.config" />
     <None Include="Properties\launchSettings.json" />
-    <None Include="run-as-admin-to-start-as-a-win7-service.cmd" />
+    <None Include="config\dev\run-as-admin-to-start-as-a-win7-service.cmd" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data.Interfaces\IClassOneDb.cs" />
