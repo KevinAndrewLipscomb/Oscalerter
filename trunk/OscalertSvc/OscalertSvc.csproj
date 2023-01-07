@@ -136,8 +136,12 @@
   <ItemGroup>
     <None Include=".editorconfig" />
     <None Include="App.config" />
+    <None Include="config\dev\App.config" />
+    <None Include="config\production\App.config" />
+    <None Include="config\x\App.config" />
     <None Include="packages.config" />
     <None Include="Properties\launchSettings.json" />
+    <None Include="start-as-a-win7-service.cmd" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data.Interfaces\IClassOneDb.cs" />
@@ -189,6 +193,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
     <VisualStudio AllowExistingFolder="true" />
