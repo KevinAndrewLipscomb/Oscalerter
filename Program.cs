@@ -64,7 +64,7 @@ namespace OscalertSvc
       biz.cad_activity_notification_agent.OnError += classOneInteraction.ShowError;
       biz.cad_activity_notification_agent.OnFailure += classOneInteraction.ShowFailure;
       //
-      biz.cad_activity_notification_agent.Work();
+      biz.cad_activity_notification_agent.Work(biz);
       }
 
     static private void Stop()

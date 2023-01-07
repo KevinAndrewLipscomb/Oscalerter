@@ -11,16 +11,17 @@ namespace Class_db_cad_records
   {
   public class TClass_db_cad_records: TClass_db
     {
+
     private class cad_record_summary
       {
       public string id;
       }
 
-    private readonly TClass_db_trail db_trail = null;
+    readonly private TClass_db_trail db_trail = null;
 
-    public TClass_db_cad_records() : base()
+    public TClass_db_cad_records(TClass_db_trail db_trail_imp) : base() // CONSTRUCTOR
       {
-      db_trail = new TClass_db_trail();
+      db_trail = db_trail_imp;
       }
 
     internal void Augment()
@@ -140,14 +141,15 @@ namespace Class_db_cad_records
       string time_at_hospital,
       string time_available,
       string time_downloaded,
-      string nature
+      string nature,
+      string incident_date_parse_format
       )
       {
       //
       // Perform the Set in the usual fashion.
       //
       var childless_field_assignments_clause = k.EMPTY
-      + "incident_date = STR_TO_DATE(NULLIF('" + incident_date + "',''),'" + ConfigurationManager.AppSettings["scrape_format_of_incident_date_mysql_expression"] + "')"
+      + "incident_date = STR_TO_DATE(NULLIF('" + incident_date + "',''),'" + incident_date_parse_format + "')"
       + " , incident_num = NULLIF('" + incident_num + "','')"
       + " , incident_address = NULLIF('" + incident_address + "','')"
       + " , call_sign = NULLIF('" + call_sign + "','')"
@@ -387,6 +389,5 @@ namespace Class_db_cad_records
       //  }
       }
 
-    } // end TClass_db_cad_records
-
+    }
   }

@@ -1,5 +1,3 @@
-using Class_biz_cad_records;
-using Class_biz_field_situations;
 using kix;
 using OscalertSvc.Models;
 using OscalertSvc.Scrape.Interface;
@@ -29,11 +27,8 @@ namespace Class_biz_cad_activity_notification_agent
       appSettings = appSettings_imp;
       }
 
-    internal void Work()
+    internal void Work(Biz biz)
       {
-      //
-      var biz_cad_records = new TClass_biz_cad_records();
-      var biz_field_situations = new TClass_biz_field_situations();
       //
       var address = k.EMPTY;
       var current_incident_num = k.EMPTY;
@@ -111,7 +106,7 @@ namespace Class_biz_cad_activity_notification_agent
               //  // Determine nature, if supported.
               //  //
               //  }
-              biz_cad_records.Set
+              biz.cad_records.Set
                 (
                 id:k.EMPTY,
                 incident_date:(incident_date_time_initialized.Split())[0],
@@ -137,19 +132,19 @@ namespace Class_biz_cad_activity_notification_agent
           }
         //
         Report.Debug("Augmenting BizModel CAD records...");
-        biz_cad_records.Augment();
+        biz.cad_records.Augment();
         Report.Debug("Augmentation complete.");
         //
         // Validate and trim the cad_records.
         //
         Report.Debug("Validating and trimming BizModel CAD records...");
-        biz_cad_records.ValidateAndTrim();
+        biz.cad_records.ValidateAndTrim();
         Report.Debug("Validation and trimming complete.");
         //
         // Notify members as appropriate.
         //
         Report.Debug("Detecting field situations and making appropriate notifications...");
-        biz_field_situations.DetectAndNotify
+        biz.field_situations.DetectAndNotify
           (
           saved_multambholds_alert_timestamp:ref saved_meta_surge_alert_timestamp_ems,
           saved_multalsholds_alert_timestamp:ref saved_meta_surge_alert_timestamp_als,
