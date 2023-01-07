@@ -135,7 +135,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
-    <None Include="App.config" />
     <None Include="config\dev\OscalertSvc.exe.config" />
     <None Include="config\dev\template-unpublished.config-template" />
     <None Include="config\production\OscalertSvc.exe.config" />
