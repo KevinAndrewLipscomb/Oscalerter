@@ -1,4 +1,5 @@
 ﻿using System.ServiceProcess;
+using System.Threading.Tasks;
 
 namespace OscalertSvc
   {
@@ -15,7 +16,7 @@ namespace OscalertSvc
         ServiceName = Program.ServiceName;
         }
 
-      protected override void OnStart(string[] args) => Work(args);
+      protected override void OnStart(string[] args) => Task.Run(() => Work(args));
 
       protected override void OnStop() => Stop();
 

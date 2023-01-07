@@ -135,13 +135,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
-    <None Include="App.config" />
-    <None Include="config\dev\App.config" />
-    <None Include="config\production\App.config" />
-    <None Include="config\x\App.config" />
+    <None Include="config\dev\OscalertSvc.exe.config" />
+    <None Include="config\dev\template-unpublished.config-template" />
+    <None Include="config\production\OscalertSvc.exe.config" />
+    <None Include="config\production\template-unpublished.config-template" />
+    <None Include="config\x\OscalertSvc.exe.config" />
+    <None Include="config\x\template-unpublished.config-template" />
     <None Include="packages.config" />
     <None Include="Properties\launchSettings.json" />
-    <None Include="start-as-a-win7-service.cmd" />
+    <None Include="run-as-admin-to-start-as-a-win7-service.cmd" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data.Interfaces\IClassOneDb.cs" />
@@ -172,11 +174,11 @@
     <Compile Include="Views\ClassOneInteraction.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\SANDBOX\kveo-it-project\foundation\dotnet\ki\ki.csproj">
+    <ProjectReference Include="..\..\..\Users\KevinAndrewLipscomb\Documents\SANDBOX\kveo-it-project\foundation\dotnet\ki\ki.csproj">
       <Project>{a20c347b-5154-47b9-a275-36157bf73352}</Project>
       <Name>ki</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\SANDBOX\kveo-it-project\oscalib\oscalib.csproj">
+    <ProjectReference Include="..\..\..\Users\KevinAndrewLipscomb\Documents\SANDBOX\kveo-it-project\oscalib\oscalib.csproj">
       <Project>{24557ac7-3c17-4149-9a5d-e920a4c5a0e5}</Project>
       <Name>oscalib</Name>
     </ProjectReference>

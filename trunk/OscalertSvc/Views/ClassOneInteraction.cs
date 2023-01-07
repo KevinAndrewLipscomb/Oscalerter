@@ -51,7 +51,7 @@ namespace OscalertSvc.Views
 
     private bool BeQuitKeyPressed()
       {
-      return Console.KeyAvailable && quitKeyList.Contains(Console.ReadKey(intercept:true).Key);
+      return !Console.IsInputRedirected && Console.KeyAvailable && quitKeyList.Contains(Console.ReadKey(intercept:true).Key);
       }
 
     public void ShowEntityOne
