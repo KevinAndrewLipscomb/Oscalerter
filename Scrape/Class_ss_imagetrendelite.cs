@@ -98,6 +98,10 @@ namespace OscalertSvc.Scrape
         {
         Report.Debug($"From TClass_ss_imagetrendelite.Request_www_imagetrendelite_com_Load, got: FORBIDDEN ACCESS");
         }
+      else if (text.Contains("Access Denied"))
+        {
+        Report.Debug($"From TClass_ss_imagetrendelite.Request_www_imagetrendelite_com_Load, got: ACCESS DENIED");
+        }
       else
         {
         try
