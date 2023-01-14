@@ -3,7 +3,6 @@ using OscalertSvc.Models;
 using OscalertSvc.Scrape.Interface;
 using System;
 using System.Collections.Specialized;
-using System.Configuration;
 using System.Net;
 using System.Threading;
 using static OscalertSvc.Scrape.Interface.IClass_ss;
@@ -43,19 +42,25 @@ namespace Class_biz_cad_activity_notification_agent
       //
       EmsCadList current_ems_cad_list;
       //
-      ReportProgress(new("Logging into CAD provider..."));
-      ss_cad_provider.Login
-        (
-        username:ConfigurationManager.AppSettings["vbemsbridge_username"],
-        password:ConfigurationManager.AppSettings["vbemsbridge_password"],
-        cookie_container:cookie_container
-        );
-      ReportProgress(new("Login complete."));
+      var datetime_of_last_login = DateTime.MinValue;
       var datetime_of_last_nudge = DateTime.Now;
       var request_identifier = Guid.NewGuid().ToString();
       while (!BeQuitCommanded)
         {
-        if (DateTime.Now > datetime_of_last_nudge.AddMinutes(double.Parse(ConfigurationManager.AppSettings["nudge_interval_minutes"])))
+        if (DateTime.Now > datetime_of_last_login.AddMinutes(double.Parse(appSettings["login_interval_minutes"])))
+          {
+          ReportProgress(new("Logging into CAD provider..."));
+          ss_cad_provider.Login
+            (
+            username:appSettings["vbemsbridge_username"],
+            password:appSettings["vbemsbridge_password"],
+            cookie_container:cookie_container
+            );
+          datetime_of_last_login = DateTime.Now;
+          datetime_of_last_nudge = DateTime.Now;
+          ReportProgress(new("Login complete."));
+          }
+        else if (DateTime.Now > datetime_of_last_nudge.AddMinutes(double.Parse(appSettings["nudge_interval_minutes"])))
           {
           Report.Debug("Nudging CAD provider...");
           ss_cad_provider.Nudge(cookie_container);
@@ -152,7 +157,7 @@ namespace Class_biz_cad_activity_notification_agent
           );
         Report.Debug("Field situations detection and notifications complete.");
         //
-        Thread.Sleep(millisecondsTimeout:int.Parse(ConfigurationManager.AppSettings["vbemsbridge_refresh_rate_in_seconds"])*1000);
+        Thread.Sleep(millisecondsTimeout:int.Parse(appSettings["vbemsbridge_refresh_rate_in_seconds"])*1000);
         }
       }
 
