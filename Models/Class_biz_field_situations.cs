@@ -313,9 +313,13 @@ namespace Class_biz_field_situations
       //
       // Digest CAD records.
       //
+      Report.Debug("Marking all field situations stale...");
       db_field_situations.MarkAllStale();
+      Report.Debug("All field situations marked stale.");
       TClass_db_field_situations.digest digest;
+      Report.Debug("Getting the queue of field situation digests...");
       var digest_q = db_field_situations.DigestQ();
+      Report.Debug("Queue of field situation digests retrieved.");
       var impression_description = k.EMPTY;
       var impression_elaboration = k.EMPTY;
       var impression_id = k.EMPTY;
@@ -326,6 +330,7 @@ namespace Class_biz_field_situations
         {
         digest = digest_q.Dequeue();
         //
+        Report.Debug("Forming impression of a field situation digest...");
         FormImpression
           (
           digest:digest,
@@ -336,6 +341,7 @@ namespace Class_biz_field_situations
           be_address_of_particular_interest:out be_address_of_particular_interest
           );
         //
+        Report.Debug("Setting this field situation...");
         db_field_situations.Set
           (
           id:k.EMPTY,
@@ -410,7 +416,9 @@ namespace Class_biz_field_situations
           biz_notifications.IssueOscalertForAddressOfParticlarInterest(elaboration:impression_elaboration);
           }
         }
+      Report.Debug("Deleting any field situations that are still stale...");
       db_field_situations.DeleteAnyStillStale();
+      Report.Debug("Stale field situations deleted.");
       //
       if (be_any_case_escalated)
         {

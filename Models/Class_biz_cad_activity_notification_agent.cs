@@ -4,7 +4,7 @@ using OscalertSvc.Scrape.Interface;
 using System;
 using System.Collections.Specialized;
 using System.Net;
-using System.Threading;
+using System.Threading.Tasks;
 using static OscalertSvc.Scrape.Interface.IClass_ss;
 
 namespace Class_biz_cad_activity_notification_agent
@@ -28,8 +28,8 @@ namespace Class_biz_cad_activity_notification_agent
 
     internal void Work(Biz biz)
       {
-      //
       var address = k.EMPTY;
+      var be_augmenting_enabled = bool.Parse(appSettings["be_augmenting_enabled"]);
       var current_incident_num = k.EMPTY;
       var incident_date_time_initialized = k.EMPTY;
       var nature = k.EMPTY;
@@ -37,6 +37,7 @@ namespace Class_biz_cad_activity_notification_agent
       var saved_meta_surge_alert_timestamp_ems = DateTime.MinValue;
       var saved_meta_surge_alert_timestamp_als = DateTime.MinValue;
       var saved_meta_surge_alert_timestamp_fire = DateTime.MinValue;
+      var vbemsbridge_refresh_rate_in_milliseconds = int.Parse(appSettings["vbemsbridge_refresh_rate_in_seconds"])*1000;
       //
       var cookie_container = new CookieContainer();
       //
@@ -136,9 +137,12 @@ namespace Class_biz_cad_activity_notification_agent
           Report.Debug("Parsing and establishment complete.");
           }
         //
-        Report.Debug("Augmenting BizModel CAD records...");
-        biz.cad_records.Augment();
-        Report.Debug("Augmentation complete.");
+        if (be_augmenting_enabled)
+          {
+          Report.Debug("Augmenting BizModel CAD records...");
+          biz.cad_records.Augment();
+          Report.Debug("Augmentation complete.");
+          }
         //
         // Validate and trim the cad_records.
         //
@@ -157,7 +161,7 @@ namespace Class_biz_cad_activity_notification_agent
           );
         Report.Debug("Field situations detection and notifications complete.");
         //
-        Thread.Sleep(millisecondsTimeout:int.Parse(appSettings["vbemsbridge_refresh_rate_in_seconds"])*1000);
+        Task.Delay(millisecondsDelay:vbemsbridge_refresh_rate_in_milliseconds);
         }
       }
 
