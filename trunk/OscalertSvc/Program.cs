@@ -55,14 +55,22 @@ namespace OscalertSvc
     static private void Work(string[] args)
       {
       //
-      // Wire up the view to observe the model and execute the business processing.
+      // Wire up the view to observe each public ObjectBiz field/class in the model.
       //
-      biz.cad_activity_notification_agent.OnProgress += classOneInteraction.ShowProgress;
-      biz.cad_activity_notification_agent.OnCompletion += classOneInteraction.ShowCompletion;
-      biz.cad_activity_notification_agent.OnDebug += classOneInteraction.ShowDebug;
-      biz.cad_activity_notification_agent.OnWarning += classOneInteraction.ShowWarning;
-      biz.cad_activity_notification_agent.OnError += classOneInteraction.ShowError;
-      biz.cad_activity_notification_agent.OnFailure += classOneInteraction.ShowFailure;
+      foreach(var field_info in typeof(Biz).GetFields())
+        {
+        if (field_info.FieldType.IsSubclassOf(typeof(ObjectBiz)))
+          {
+          (field_info.GetValue(biz) as ObjectBiz).OnProgress += classOneInteraction.ShowProgress;
+          (field_info.GetValue(biz) as ObjectBiz).OnCompletion += classOneInteraction.ShowCompletion;
+          (field_info.GetValue(biz) as ObjectBiz).OnDebug += classOneInteraction.ShowDebug;
+          (field_info.GetValue(biz) as ObjectBiz).OnWarning += classOneInteraction.ShowWarning;
+          (field_info.GetValue(biz) as ObjectBiz).OnError += classOneInteraction.ShowError;
+          (field_info.GetValue(biz) as ObjectBiz).OnFailure += classOneInteraction.ShowFailure;
+          }
+        }
+      //
+      // Execute the business processing.
       //
       biz.cad_activity_notification_agent.Work(biz);
       }
