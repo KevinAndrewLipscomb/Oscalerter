@@ -1,6 +1,7 @@
 ﻿using OscalertSvc.Models;
 using OscalertSvc.Views;
 using System;
+using System.Diagnostics;
 using System.ServiceProcess;
 
 namespace OscalertSvc
@@ -23,31 +24,40 @@ namespace OscalertSvc
     /// <param name="args">None</param>
     static void Main(string[] args)
       {
+
       classOneInteraction = new ClassOneInteraction();
         // An Interaction acts as a VIEW.
 
-      if (Environment.UserInteractive)
+      try
         {
-        //
-        // running as console app
-        //
-        classOneInteraction.OnQuitCommanded += biz.cad_activity_notification_agent.Quit;
-          // An Interaction used by the controller inside a loop must also expose BeQuitCommanded.  If any parameters are needed in
-          // addition to the command line args, the Interaction's constructor prompts the user for, and returns, such parameters.
+        if (Environment.UserInteractive)
+          {
+          //
+          // running as console app
+          //
+          classOneInteraction.OnQuitCommanded += biz.cad_activity_notification_agent.Quit;
+            // An Interaction used by the controller inside a loop must also expose BeQuitCommanded.  If any parameters are needed
+            // in addition to the command line args, the Interaction's constructor prompts the user for, and returns, such
+            // parameters.
 
-        Work(args);
-          // This blocks until the biz layer (the model) is complete.  The model observes the interaction (the view), which offers
-          // the user a way to command a quit, so the model may complete on its own or quit at the behest of the user.
+          Work(args);
+            // This blocks until the biz layer (the model) is complete.  The model observes the interaction (the view), which offers
+            // the user a way to command a quit, so the model may complete on its own or quit at the behest of the user.
 
-        Stop();
+          Stop();
+          }
+        else
+          {
+          //
+          // running as service
+          //
+          using var service = new Service();
+          ServiceBase.Run(service);
+          }
         }
-      else
+      catch (Exception e)
         {
-        //
-        // running as service
-        //
-        using var service = new Service();
-        ServiceBase.Run(service);
+        classOneInteraction.ShowFailure(Process.GetCurrentProcess().ProcessName,$"{e}");
         }
 
       }
