@@ -84,23 +84,23 @@ namespace OscalertSvc.Scrape
       var text = HtmlDocumentOf(ConsumedStreamOf(response)).DocumentNode.InnerText;
       if (text.Contains("Server Error"))
         {
-        Report.Debug($"From TClass_ss_imagetrendelite.Request_www_imagetrendelite_com_Load, got: SERVER ERROR");
+        Report.Warning($"From TClass_ss_imagetrendelite.Request_www_imagetrendelite_com_Load, got: SERVER ERROR");
         }
       else if (text.Contains("Site Temporarily Offline"))
         {
-        Report.Debug($"From TClass_ss_imagetrendelite.Request_www_imagetrendelite_com_Load, got: SITE TEMPORARILY OFFLINE");
+        Report.Warning($"From TClass_ss_imagetrendelite.Request_www_imagetrendelite_com_Load, got: SITE TEMPORARILY OFFLINE");
         }
       else if (text.Contains("Service Unavailable"))
         {
-        Report.Debug($"From TClass_ss_imagetrendelite.Request_www_imagetrendelite_com_Load, got: SERVICE UNAVAILABLE");
+        Report.Warning($"From TClass_ss_imagetrendelite.Request_www_imagetrendelite_com_Load, got: SERVICE UNAVAILABLE");
         }
       else if (text.Contains("Forbidden Access"))
         {
-        Report.Debug($"From TClass_ss_imagetrendelite.Request_www_imagetrendelite_com_Load, got: FORBIDDEN ACCESS");
+        Report.Warning($"From TClass_ss_imagetrendelite.Request_www_imagetrendelite_com_Load, got: FORBIDDEN ACCESS");
         }
       else if (text.Contains("Access Denied"))
         {
-        Report.Debug($"From TClass_ss_imagetrendelite.Request_www_imagetrendelite_com_Load, got: ACCESS DENIED");
+        Report.Warning($"From TClass_ss_imagetrendelite.Request_www_imagetrendelite_com_Load, got: ACCESS DENIED");
         }
       else
         {
@@ -109,12 +109,12 @@ namespace OscalertSvc.Scrape
           current_ems_cad_list = JsonSerializer.Deserialize<EmsCadList>(text);
           if (current_ems_cad_list.ErrorMessage != null)
             {
-            Report.Debug($"TClass_ss_imagetrendelite.CurrentEmsCadList got an EmsCadList with ErrorMessage: " + current_ems_cad_list.ErrorMessage.ToString() + k.NEW_LINE);
+            Report.Warning($"TClass_ss_imagetrendelite.CurrentEmsCadList got an EmsCadList with ErrorMessage: " + current_ems_cad_list.ErrorMessage.ToString() + k.NEW_LINE);
             }
           }
         catch (Exception the_exception)
           {
-          Report.Debug($"From TClass_ss_imagetrendelite.Request_www_imagetrendelite_com_Load, got: UNHANDLED " + the_exception.ToString() + k.NEW_LINE + text);
+          Report.Error($"From TClass_ss_imagetrendelite.Request_www_imagetrendelite_com_Load, got: UNHANDLED " + the_exception.ToString() + k.NEW_LINE + text);
           }
         }
       return current_ems_cad_list;
@@ -294,7 +294,7 @@ namespace OscalertSvc.Scrape
           }
         else
           {
-          Report.Debug($"TClass_ss_imagetrendelite.Request_www_imagetrendelite_com_Load encountered a WebException: " + e.ToString() + k.NEW_LINE);
+          Report.Error($"TClass_ss_imagetrendelite.Request_www_imagetrendelite_com_Load encountered a WebException: " + e.ToString() + k.NEW_LINE);
           return false;
           }
         }
@@ -302,7 +302,7 @@ namespace OscalertSvc.Scrape
         {
         if (response != null)
           response.Close();
-        Report.Debug($"TClass_ss_imagetrendelite.Request_www_imagetrendelite_com_Load encountered a non-web Exception: " + e.ToString() + k.NEW_LINE);
+        Report.Error($"TClass_ss_imagetrendelite.Request_www_imagetrendelite_com_Load encountered a non-web Exception: " + e.ToString() + k.NEW_LINE);
         return false;
         }
 
