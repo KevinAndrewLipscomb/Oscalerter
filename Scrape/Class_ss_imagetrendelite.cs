@@ -102,6 +102,10 @@ namespace OscalertSvc.Scrape
         {
         Report.Warning($"From TClass_ss_imagetrendelite.Request_www_imagetrendelite_com_Load, got: ACCESS DENIED");
         }
+      else if (text.Contains("An error occurred trying to load records for this view."))
+        {
+        Report.Warning($"From TClass_ss_imagetrendelite.Request_www_imagetrendelite_com_Load, got: AN ERROR OCCURRED TRYING TO LOAD RECORDS FOR THIS VIEW");
+        }
       else
         {
         try
