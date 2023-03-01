@@ -48,120 +48,130 @@ namespace Class_biz_cad_activity_notification_agent
       var request_identifier = Guid.NewGuid().ToString();
       while (!BeQuitCommanded)
         {
-        if (DateTime.Now > datetime_of_last_login.AddMinutes(double.Parse(appSettings["login_interval_minutes"])))
+        try
           {
-          ReportProgress(new("Logging into CAD provider..."));
-          ss_cad_provider.Login
-            (
-            username:appSettings["vbemsbridge_username"],
-            password:appSettings["vbemsbridge_password"],
-            cookie_container:cookie_container
-            );
-          datetime_of_last_login = DateTime.Now;
-          datetime_of_last_nudge = DateTime.Now;
-          ReportProgress(new("Login complete."));
-          }
-        else if (DateTime.Now > datetime_of_last_nudge.AddMinutes(double.Parse(appSettings["nudge_interval_minutes"])))
-          {
-          Report.Debug("Nudging CAD provider...");
-          ss_cad_provider.Nudge(cookie_container);
-          datetime_of_last_nudge = DateTime.Now;
-          Report.Debug("Nudge complete.");
-          }
-        Report.Debug("Retrieving provider's current EMS CAD list...");
-        current_ems_cad_list = ss_cad_provider.CurrentEmsCadList(cookie_container,request_identifier);
-        Report.Debug("Retrieval complete.");
-        if (current_ems_cad_list == null)
-          {
-          Report.Error("ss_cad_provider.CurrentEmsCadList returned null.");
-          }
-        else
-          {
-          request_identifier = current_ems_cad_list.RequestIdentifier;
-          var rows = current_ems_cad_list.Records;
-          Report.Debug("Parsing provider's current CAD records and establishing them in the BizModel...");
-          for (var i = new k.subtype<int>(0,rows.Count); i.val < i.LAST; i.val++)
+          if (DateTime.Now > datetime_of_last_login.AddMinutes(double.Parse(appSettings["login_interval_minutes"])))
             {
-            var cells = rows[i.val].Columns;
-            //
-            // Remove the IncidentNumberNotValue cell if it exists in this record.  It only appears in some records.
-            //
-            if (cells.Count == 19)
-              {
-              cells.RemoveAt(2);
-              }
-            //
-            address = cells[4].Value;
-            current_incident_num = cells[1].Value;
-            incident_date_time_initialized = cells[9].Value;
-            if(
-                (incident_date_time_initialized.Length > 1) // there is an incident_date/time_initialized
-              &&
-                (address.Length > 1) // there is an address
-              &&
-                (
-                  (current_incident_num[0] == 'E') // this is an EMS incident whose number starts with EMS
-                ||
-                  (current_incident_num[0] == 'F') // this if a fire incident whose number starts with FD
-                )
-              )
-              {
-              //if (current_incident_num != saved_incident_num)
-              //  {
-              //  //
-              //  // Determine nature, if supported.
-              //  //
-              //  }
-              biz.cad_records.Set
-                (
-                id:k.EMPTY,
-                incident_date:(incident_date_time_initialized.Split())[0],
-                incident_num:current_incident_num,
-                incident_address:k.Safe(address,k.safe_hint_type.PUNCTUATED),
-                call_sign:cells[6].Value,
-                time_initialized:(incident_date_time_initialized.Split())[1],
-                time_of_alarm:(cells[0].Value.Contains(k.SPACE) ? (cells[0].Value.Split())[1] : k.EMPTY),
-                time_enroute:(cells[10].Value.Contains(k.SPACE) ? (cells[10].Value.Split())[1] : k.EMPTY),
-                time_on_scene:(cells[16].Value.Contains(k.SPACE) ? (cells[16].Value.Split())[1] : k.EMPTY),
-                time_transporting:(cells[12].Value.Contains(k.SPACE) ? (cells[12].Value.Split())[1] : k.EMPTY),
-                time_at_hospital:(cells[13].Value.Contains(k.SPACE) ? (cells[13].Value.Split())[1] : k.EMPTY),
-                time_available:(cells[14].Value.Contains(k.SPACE) ? (cells[14].Value.Split())[1] : k.EMPTY),
-                time_downloaded:k.EMPTY,
-                nature:nature
-                );
-              //saved_incident_num = current_incident_num; // for use managing nature
-              }
-            cells.Clear();
+            ReportProgress(new("Logging into CAD provider..."));
+            ss_cad_provider.Login
+              (
+              username:appSettings["vbemsbridge_username"],
+              password:appSettings["vbemsbridge_password"],
+              cookie_container:cookie_container
+              );
+            datetime_of_last_login = DateTime.Now;
+            datetime_of_last_nudge = DateTime.Now;
+            ReportProgress(new("Login complete."));
             }
-          rows.Clear();
-          Report.Debug("Parsing and establishment complete.");
+          else if (DateTime.Now > datetime_of_last_nudge.AddMinutes(double.Parse(appSettings["nudge_interval_minutes"])))
+            {
+            Report.Debug("Nudging CAD provider...");
+            ss_cad_provider.Nudge(cookie_container);
+            datetime_of_last_nudge = DateTime.Now;
+            Report.Debug("Nudge complete.");
+            }
+          Report.Debug("Retrieving provider's current EMS CAD list...");
+          current_ems_cad_list = ss_cad_provider.CurrentEmsCadList(cookie_container,request_identifier);
+          Report.Debug("Retrieval complete.");
+          if (current_ems_cad_list == null)
+            {
+            Report.Error("ss_cad_provider.CurrentEmsCadList returned null.");
+            }
+          else
+            {
+            request_identifier = current_ems_cad_list.RequestIdentifier;
+            var rows = current_ems_cad_list.Records;
+            Report.Debug("Parsing provider's current CAD records and establishing them in the BizModel...");
+            for (var i = new k.subtype<int>(0,rows.Count); i.val < i.LAST; i.val++)
+              {
+              var cells = rows[i.val].Columns;
+              //
+              // Remove the IncidentNumberNotValue cell if it exists in this record.  It only appears in some records.
+              //
+              if (cells.Count == 19)
+                {
+                cells.RemoveAt(2);
+                }
+              //
+              address = cells[4].Value;
+              current_incident_num = cells[1].Value;
+              incident_date_time_initialized = cells[9].Value;
+              if(
+                  (incident_date_time_initialized.Length > 1) // there is an incident_date/time_initialized
+                &&
+                  (address.Length > 1) // there is an address
+                &&
+                  (
+                    (current_incident_num[0] == 'E') // this is an EMS incident whose number starts with EMS
+                  ||
+                    (current_incident_num[0] == 'F') // this if a fire incident whose number starts with FD
+                  )
+                )
+                {
+                //if (current_incident_num != saved_incident_num)
+                //  {
+                //  //
+                //  // Determine nature, if supported.
+                //  //
+                //  }
+                biz.cad_records.Set
+                  (
+                  id:k.EMPTY,
+                  incident_date:(incident_date_time_initialized.Split())[0],
+                  incident_num:current_incident_num,
+                  incident_address:k.Safe(address,k.safe_hint_type.PUNCTUATED),
+                  call_sign:cells[6].Value,
+                  time_initialized:(incident_date_time_initialized.Split())[1],
+                  time_of_alarm:(cells[0].Value.Contains(k.SPACE) ? (cells[0].Value.Split())[1] : k.EMPTY),
+                  time_enroute:(cells[10].Value.Contains(k.SPACE) ? (cells[10].Value.Split())[1] : k.EMPTY),
+                  time_on_scene:(cells[16].Value.Contains(k.SPACE) ? (cells[16].Value.Split())[1] : k.EMPTY),
+                  time_transporting:(cells[12].Value.Contains(k.SPACE) ? (cells[12].Value.Split())[1] : k.EMPTY),
+                  time_at_hospital:(cells[13].Value.Contains(k.SPACE) ? (cells[13].Value.Split())[1] : k.EMPTY),
+                  time_available:(cells[14].Value.Contains(k.SPACE) ? (cells[14].Value.Split())[1] : k.EMPTY),
+                  time_downloaded:k.EMPTY,
+                  nature:nature
+                  );
+                //saved_incident_num = current_incident_num; // for use managing nature
+                }
+              cells.Clear();
+              }
+            rows.Clear();
+            Report.Debug("Parsing and establishment complete.");
+            }
+          //
+          if (be_augmenting_enabled)
+            {
+            Report.Debug("Augmenting BizModel CAD records...");
+            biz.cad_records.Augment();
+            Report.Debug("Augmentation complete.");
+            }
+          //
+          // Validate and trim the cad_records.
+          //
+          Report.Debug("Validating and trimming BizModel CAD records...");
+          biz.cad_records.ValidateAndTrim();
+          Report.Debug("Validation and trimming complete.");
+          //
+          // Notify members as appropriate.
+          //
+          Report.Debug("Detecting field situations and making appropriate notifications...");
+          biz.field_situations.DetectAndNotify
+            (
+            saved_multambholds_alert_timestamp:ref saved_meta_surge_alert_timestamp_ems,
+            saved_multalsholds_alert_timestamp:ref saved_meta_surge_alert_timestamp_als,
+            saved_firesurge_alert_timestamp:ref saved_meta_surge_alert_timestamp_fire
+            );
+          Report.Debug("Field situations detection and notifications complete.");
+          //
+          Task.Delay(millisecondsDelay:vbemsbridge_refresh_rate_in_milliseconds);
           }
-        //
-        if (be_augmenting_enabled)
+        catch (Exception e)
           {
-          Report.Debug("Augmenting BizModel CAD records...");
-          biz.cad_records.Augment();
-          Report.Debug("Augmentation complete.");
+          Report.Error($"{e}");
+          ReportProgress(new($"Pausing to recover..."));
+          Task.Delay(millisecondsDelay:int.Parse(appSettings["recovery_interval_minutes"]));
+          datetime_of_last_login = DateTime.MinValue;
           }
-        //
-        // Validate and trim the cad_records.
-        //
-        Report.Debug("Validating and trimming BizModel CAD records...");
-        biz.cad_records.ValidateAndTrim();
-        Report.Debug("Validation and trimming complete.");
-        //
-        // Notify members as appropriate.
-        //
-        Report.Debug("Detecting field situations and making appropriate notifications...");
-        biz.field_situations.DetectAndNotify
-          (
-          saved_multambholds_alert_timestamp:ref saved_meta_surge_alert_timestamp_ems,
-          saved_multalsholds_alert_timestamp:ref saved_meta_surge_alert_timestamp_als,
-          saved_firesurge_alert_timestamp:ref saved_meta_surge_alert_timestamp_fire
-          );
-        Report.Debug("Field situations detection and notifications complete.");
-        //
-        Task.Delay(millisecondsDelay:vbemsbridge_refresh_rate_in_milliseconds);
         }
       }
 
