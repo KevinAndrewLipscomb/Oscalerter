@@ -168,7 +168,7 @@ namespace Class_biz_cad_activity_notification_agent
         catch (Exception e)
           {
           Report.Error($"{e}");
-          ReportProgress(new($"Pausing to recover..."));
+          Report.Warning("Pausing to recover...");
           Task.Delay(millisecondsDelay:int.Parse(appSettings["recovery_interval_minutes"]));
           datetime_of_last_login = DateTime.MinValue;
           }
