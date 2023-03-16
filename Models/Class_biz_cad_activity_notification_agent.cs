@@ -4,7 +4,7 @@ using OscalertSvc.Scrape.Interface;
 using System;
 using System.Collections.Specialized;
 using System.Net;
-using System.Threading.Tasks;
+using System.Threading;
 using static OscalertSvc.Scrape.Interface.IClass_ss;
 
 namespace Class_biz_cad_activity_notification_agent
@@ -163,13 +163,13 @@ namespace Class_biz_cad_activity_notification_agent
             );
           Report.Debug("Field situations detection and notifications complete.");
           //
-          Task.Delay(millisecondsDelay:vbemsbridge_refresh_rate_in_milliseconds);
+          Thread.Sleep(millisecondsTimeout:vbemsbridge_refresh_rate_in_milliseconds);
           }
         catch (Exception e)
           {
           Report.Error($"{e}");
           Report.Warning("Pausing to recover...");
-          Task.Delay(millisecondsDelay:int.Parse(appSettings["recovery_interval_minutes"]));
+          Thread.Sleep(millisecondsTimeout:int.Parse(appSettings["recovery_interval_minutes"]));
           datetime_of_last_login = DateTime.MinValue;
           }
         }
