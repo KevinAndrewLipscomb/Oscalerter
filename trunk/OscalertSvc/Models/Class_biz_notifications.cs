@@ -30,7 +30,8 @@ namespace Class_biz_notifications
     public TClass_biz_notifications() : base()
       {
       application_name = ConfigurationManager.AppSettings["application_name"];
-      db_notifications = new TClass_db_notifications();
+      db_notifications = new();
+      db_oscalert_logs = new();
       host_domain_name = ConfigurationManager.AppSettings["host_domain_name"];
       runtime_root_fullspec = ConfigurationManager.AppSettings["runtime_root_fullspec"];
       }
