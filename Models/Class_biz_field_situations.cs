@@ -409,7 +409,11 @@ namespace Class_biz_field_situations
           }
         if (be_escalation && (impression_description.EndsWith("AlarmFire") || impression_description.StartsWith("Mci")))
           {
-          ss_broadcastify.AddAlert(biz_publicity.RenditionOfOscalertLogContent(impression_elaboration) + " Active Case Board: http://goo.gl/StI8EX");
+          ss_broadcastify.AddAlert
+            (
+            alert:biz_publicity.RenditionOfOscalertLogContent(impression_elaboration) + " Active Case Board: http://goo.gl/StI8EX",
+            be_fire:impression_description.EndsWith("AlarmFire") // default is false (MCI)
+            );
           }
         if (be_address_of_particular_interest)
           {
