@@ -2,4 +2,14 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/.svn
+*.dll.config
+*.exe.config
+*.pdb
+*.user
+.svn/
+.vs/
+bin/*.xml
+obj/
+packages/
+unpublished.*
+/App.config
