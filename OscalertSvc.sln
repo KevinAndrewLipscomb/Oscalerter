@@ -14,9 +14,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ki", "..\..\..\Users\KevinAndrewLipscomb\Documents\SANDBOX\kveo-it-project\foundation\dotnet\ki\ki.csproj", "{A20C347B-5154-47B9-A275-36157BF73352}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ki", "lib\ki\ki.csproj", "{A20C347B-5154-47B9-A275-36157BF73352}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "oscalib", "..\..\..\Users\KevinAndrewLipscomb\Documents\SANDBOX\kveo-it-project\oscalib\oscalib.csproj", "{24557AC7-3C17-4149-9A5D-E920A4C5A0E5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "oscalib", "lib\oscalib\oscalib.csproj", "{24557AC7-3C17-4149-9A5D-E920A4C5A0E5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A20C347B-5154-47B9-A275-36157BF73352} = {A20C347B-5154-47B9-A275-36157BF73352}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

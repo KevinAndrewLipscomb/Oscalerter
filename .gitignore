@@ -13,3 +13,5 @@ obj/
 packages/
 unpublished.*
 /App.config
+/lib/ki/
+/lib/oscalib/
