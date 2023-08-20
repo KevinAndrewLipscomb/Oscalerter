@@ -1,5 +1,5 @@
 REM
-REM $Id$
+REM $Id: work.bat 8004 2023-05-27 22:52:59Z kevinanlipscomb $
 REM
 cd "C:\Program Files\Kalips'o Infogistics LLC\OscalertSvc"
 start /max explorer /e,/select,"C:\Program Files\Kalips'o Infogistics LLC\OscalertSvc\.svn"
