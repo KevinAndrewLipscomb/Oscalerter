@@ -37,7 +37,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <Prefer32Bit>false</Prefer32Bit>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
     <CodeAnalysisRuleSet>lib\ki\ki.ruleset</CodeAnalysisRuleSet>
@@ -152,12 +152,6 @@
   <ItemGroup>
     <PackageReference Include="HtmlAgilityPack">
       <Version>1.11.46</Version>
-    </PackageReference>
-    <PackageReference Include="K4os.Compression.LZ4.Streams">
-      <Version>1.2.16</Version>
-    </PackageReference>
-    <PackageReference Include="K4os.Hash.xxHash">
-      <Version>1.0.7</Version>
     </PackageReference>
     <PackageReference Include="log4net">
       <Version>2.0.15</Version>
