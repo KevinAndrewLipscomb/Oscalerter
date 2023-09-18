@@ -23,14 +23,14 @@ namespace Class_biz_field_situations
     //
     //--
 
-    private readonly int SMALL_MCI_NUM_AMBULANCES_THRESHOLD = 4;
+    readonly private int SMALL_MCI_NUM_AMBULANCES_THRESHOLD = 4;
 
-    private readonly TClass_biz_notifications biz_notifications = null;
-    private readonly TClass_biz_publicity biz_publicity = null;
-    private readonly TClass_db_field_situation_impressions db_field_situation_impressions = null;
-    private readonly TClass_db_field_situations db_field_situations = null;
-    private readonly TClass_db_schedule_assignments db_schedule_assignments = null;
-    private readonly TClass_ss_broadcastify ss_broadcastify = null;
+    readonly private TClass_biz_notifications biz_notifications = null;
+    readonly private TClass_biz_publicity biz_publicity = null;
+    readonly private TClass_db_field_situation_impressions db_field_situation_impressions = null;
+    readonly private TClass_db_field_situations db_field_situations = null;
+    readonly private TClass_db_schedule_assignments db_schedule_assignments = null;
+    readonly private TClass_ss_broadcastify ss_broadcastify = null;
 
     private void FormImpression
       (
