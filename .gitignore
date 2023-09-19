@@ -10,8 +10,10 @@
 .vs/
 bin/*.xml
 obj/
+MigrationBackup/
 packages/
 unpublished.*
 /App.config
 /lib/ki/
 /lib/oscalib/
+
