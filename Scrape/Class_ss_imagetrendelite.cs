@@ -1,11 +1,11 @@
 using Class_ss;
 using kix;
+using Newtonsoft.Json;
 using OscalertSvc.Scrape.Interface;
 using System;
 using System.Configuration;
 using System.IO;
 using System.Net;
-using System.Text.Json;
 using static OscalertSvc.Scrape.Interface.IClass_ss;
 
 namespace OscalertSvc.Scrape
@@ -110,7 +110,7 @@ namespace OscalertSvc.Scrape
         {
         try
           {
-          current_ems_cad_list = JsonSerializer.Deserialize<EmsCadList>(text);
+          current_ems_cad_list = JsonConvert.DeserializeObject<EmsCadList>(text);
           if (current_ems_cad_list.ErrorMessage != null)
             {
             Report.Warning($"TClass_ss_imagetrendelite.CurrentEmsCadList got an EmsCadList with ErrorMessage: " + current_ems_cad_list.ErrorMessage.ToString() + k.NEW_LINE);
