@@ -3,7 +3,7 @@ using ki.mvc;
 using System.Collections.Generic;
 using System.Net;
 
-namespace OscalertSvc.Scrape.Interface
+namespace OscalertConsoleApp.Scrape.Interface
   {
   public interface IClass_ss
     {

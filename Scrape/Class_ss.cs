@@ -1,7 +1,7 @@
 using HtmlAgilityPack;
 using ki.mvc;
 using kix;
-using OscalertSvc.Scrape.Interface;
+using OscalertConsoleApp.Scrape.Interface;
 using System;
 using System.Configuration;
 using System.IO;

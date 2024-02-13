@@ -1,5 +1,5 @@
-sc delete OscalertSvc
-sc create OscalertSvc binpath= "C:\Program Files\Kalips'o Infogistics LLC\OscalertSvc\bin\OscalertSvc.exe" start= auto displayname= "OscalertSvc"
-sc description OscalertSvc "OscalertSvc - automatic near-realtime cellphone notifications about certain VBRescue field situations"
-sc start OscalertSvc
+sc delete OscalertConsoleApp
+sc create OscalertConsoleApp binpath= "C:\Program Files\Kalips'o Infogistics LLC\OscalertConsoleApp\bin\OscalertConsoleApp.exe" start= auto displayname= "OscalertConsoleApp"
+sc description OscalertConsoleApp "OscalertConsoleApp - automatic near-realtime cellphone notifications about certain VBRescue field situations"
+sc start OscalertConsoleApp
 pause

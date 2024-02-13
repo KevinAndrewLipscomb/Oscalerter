@@ -1,7 +1,7 @@
 ﻿using kix;
 using MySql.Data.MySqlClient;
 
-namespace OscalertSvc.Data
+namespace OscalertConsoleApp.Data
   {
   class ClassOneMysqlDb : ClassMysqlDb, IClassOneDb
     {

@@ -1,8 +1,8 @@
-﻿using OscalertSvc.Data;
+﻿using OscalertConsoleApp.Data;
 using System.Collections.Specialized;
 using System.Threading;
 
-namespace OscalertSvc.Models
+namespace OscalertConsoleApp.Models
   {
   public class ClassOneBiz : ObjectBiz
     {

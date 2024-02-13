@@ -1,0 +1,2 @@
+﻿In Visual Studio's Solution Explorer, select each file in this folder, open its properties, and make sure its Build Action is set to
+None.

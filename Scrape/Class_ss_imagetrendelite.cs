@@ -1,14 +1,14 @@
 using Class_ss;
 using kix;
 using Newtonsoft.Json;
-using OscalertSvc.Scrape.Interface;
+using OscalertConsoleApp.Scrape.Interface;
 using System;
 using System.Configuration;
 using System.IO;
 using System.Net;
-using static OscalertSvc.Scrape.Interface.IClass_ss;
+using static OscalertConsoleApp.Scrape.Interface.IClass_ss;
 
-namespace OscalertSvc.Scrape
+namespace OscalertConsoleApp.Scrape
   {
   public class TClass_ss_imagetrendelite : TClass_ss, IClass_ss
     {
