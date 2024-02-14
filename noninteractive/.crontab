@@ -1,0 +1,4 @@
+MAILTO=
+#
+#mmhh DD MM d (mm=minute, hh=hour, DD=DayOfMonth, MM=MonthNum, d=DayOfWeekWhereZeroIsSunday)
+@reboot /cygdrive/c/Users/KevinAndrewLipscomb/Documents/SANDBOX/vocational/kalipso-infogistics/OWNREPO/OscalertConsoleApp/bin/OscalertConsoleApp.exe
