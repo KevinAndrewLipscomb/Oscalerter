@@ -1,7 +1,7 @@
 // Derived from KiAspdotnetFramework/component/biz/Class~biz~~template~kicrudhelped~item.cs~template
 
 using Class_db_field_situation_impressions;
-using OscalertConsoleApp.Models;
+using Oscalerter.Models;
 
 namespace Class_biz_field_situation_impressions
   {

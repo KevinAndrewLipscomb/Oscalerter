@@ -1,10 +1,10 @@
-﻿using OscalertConsoleApp.Models;
-using OscalertConsoleApp.Views;
+﻿using Oscalerter.Models;
+using Oscalerter.Views;
 using System;
 using System.Diagnostics;
 using System.ServiceProcess;
 
-namespace OscalertConsoleApp
+namespace Oscalerter
   {
   /// <summary>
   /// Provides automatic near-realtime cellphone notifications about certain VBRescue field situations.  Can be invoked as a console

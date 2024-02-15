@@ -5,7 +5,7 @@ set bash=C:\cygwin\bin\bash
 set cyg=/cygdrive/c/cygwin/bin
 echo.
 echo *
-echo * Make sure any instance of Visual Studio that has touched OscalertConsoleApp.sln has been shut down.
+echo * Make sure any instance of Visual Studio that has touched Oscalerter.sln has been shut down.
 echo *
 pause
 echo.
@@ -43,11 +43,11 @@ echo.
 nuget restore
 echo.
 echo *
-echo * OscalertConsoleApp.sln will now open in Visual Studio.  Manually launch a Build, then perform the recommended runtime assemblyBinding
+echo * Oscalerter.sln will now open in Visual Studio.  Manually launch a Build, then perform the recommended runtime assemblyBinding
 echo * redirect procedure.
 echo *
 pause
-OscalertConsoleApp.sln
+Oscalerter.sln
 echo.
 echo *
 echo * Put any configuration/runtime element changes into controlled instances of App.config as applicable.

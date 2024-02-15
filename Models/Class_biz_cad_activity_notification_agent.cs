@@ -1,11 +1,11 @@
 using kix;
-using OscalertConsoleApp.Models;
-using OscalertConsoleApp.Scrape.Interface;
+using Oscalerter.Models;
+using Oscalerter.Scrape.Interface;
 using System;
 using System.Collections.Specialized;
 using System.Net;
 using System.Threading;
-using static OscalertConsoleApp.Scrape.Interface.IClass_ss;
+using static Oscalerter.Scrape.Interface.IClass_ss;
 
 namespace Class_biz_cad_activity_notification_agent
   {

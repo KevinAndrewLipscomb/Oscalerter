@@ -4,11 +4,11 @@ using Class_biz_field_situations;
 using Class_biz_incident_nature_translations;
 using Class_db_cad_records;
 using Class_db_trail;
-using OscalertConsoleApp.Scrape;
+using Oscalerter.Scrape;
 using System.Collections.Specialized;
 using System.Configuration;
 
-namespace OscalertConsoleApp.Models
+namespace Oscalerter.Models
   {
   /// <summary>
   /// The composition root of the application

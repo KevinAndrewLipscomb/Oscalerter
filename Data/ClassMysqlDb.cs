@@ -3,7 +3,7 @@ using System.Collections;
 using System.Configuration;
 using System.Data;
 
-namespace OscalertConsoleApp.Data
+namespace Oscalerter.Data
   {
   public abstract class ClassMysqlDb
     {

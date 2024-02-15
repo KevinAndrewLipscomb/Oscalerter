@@ -1,17 +1,17 @@
 schtasks /end^
- /tn Oscalert
+ /tn Oscalerter
 ::
 schtasks /delete^
- /tn Oscalert^
+ /tn Oscalerter^
  /f
 ::
 schtasks /create^
- /tn Oscalert^
- /tr "C:\Users\KevinAndrewLipscomb\Documents\SANDBOX\vocational\kalipso-infogistics\OWNREPO\OscalertConsoleApp\bin\OscalertConsoleApp.exe"^
+ /tn Oscalerter^
+ /tr "C:\Users\KevinAndrewLipscomb\Documents\SANDBOX\vocational\kalipso-infogistics\OWNREPO\Oscalerter\bin\Oscalerter.exe"^
  /sc onstart^
  /np
 ::
 schtasks /run^
- /tn Oscalert
+ /tn Oscalerter
 ::
 %windir%\system32\taskschd.msc

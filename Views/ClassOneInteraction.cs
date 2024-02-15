@@ -1,12 +1,12 @@
 ﻿using kix;
 using log4net;
 using log4net.Config;
-using OscalertConsoleApp.Models;
+using Oscalerter.Models;
 using Spectre.Console;
 using System;
 using System.Collections.Generic;
 
-namespace OscalertConsoleApp.Views
+namespace Oscalerter.Views
 {
   class ClassOneInteraction
     {
