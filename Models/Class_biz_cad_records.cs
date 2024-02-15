@@ -2,7 +2,7 @@
 
 using Class_db_cad_records;
 using MySql.Data.MySqlClient;
-using OscalertSvc.Models;
+using Oscalerter.Models;
 using System;
 
 namespace Class_biz_cad_records

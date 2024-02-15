@@ -7,7 +7,7 @@ using Class_db_field_situations;
 using Class_db_schedule_assignments;
 using Class_ss_broadcastify;
 using kix;
-using OscalertSvc.Models;
+using Oscalerter.Models;
 using System;
 using System.Configuration;
 

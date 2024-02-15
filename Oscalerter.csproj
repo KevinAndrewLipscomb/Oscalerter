@@ -5,7 +5,7 @@
     <ProjectGuid>{DBBE1791-221C-40C9-9402-F0BBAED84CF3}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <NoStandardLibraries>false</NoStandardLibraries>
-    <AssemblyName>OscalertSvc</AssemblyName>
+    <AssemblyName>Oscalerter</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -55,13 +55,13 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
-    <RootNamespace>OscalertSvc</RootNamespace>
+    <RootNamespace>Oscalerter</RootNamespace>
   </PropertyGroup>
   <PropertyGroup>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>OscalertSvc.Program</StartupObject>
+    <StartupObject>Oscalerter.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
@@ -76,25 +76,47 @@
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="ZstdNet, Version=1.4.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <HintPath>packages\MySql.Data.8.0.31\lib\net452\ZstdNet.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
+    <None Include="0build.cmd" />
     <None Include="App.config" />
-    <None Include="config\dev\App.config" />
-    <None Include="config\dev\template-unpublished.config-template" />
-    <None Include="config\production\OscalertSvc.exe.config" />
-    <None Include="config\production\run-as-admin-to-start-as-a-win7-service.cmd" />
-    <None Include="config\production\template-unpublished.config-template" />
-    <None Include="config\x\OscalertSvc.exe.config" />
-    <None Include="config\x\run-as-admin-to-start-as-a-win7-service.cmd" />
-    <None Include="config\x\template-unpublished.config-template" />
+    <None Include="App.DEVELOPMENT.config">
+      <DependentUpon>App.config</DependentUpon>
+    </None>
+    <None Include="config\Detail\appSettings.DEVELOPMENT.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="config\Detail\appSettings.PRODUCTION.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="config\Sensitive\000-DO-NOT-VERSION-OR-PUBLISH-OTHER-FILES-IN-THIS-FOLDER.txt" />
+    <Content Include="config\Template\template-sensitiveAppSettings.config-template" />
+    <None Include="config\Detail\log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="config\Detail\appSettings.X.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="config\Sensitive\sensitiveAppSettings.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Directory.Build.props" />
+    <None Include="noninteractive\.crontab" />
+    <None Include="noninteractive\run-as-admin-to-init-scheduled-task-X.cmd" />
+    <None Include="noninteractive\run-as-admin-to-init-scheduled-task-P-or-D.cmd" />
+    <None Include="noninteractive\.crontab.headstart.bash" />
+    <None Include="Oscalerter.exe.PRODUCTION.config">
+      <DependentUpon>App.config</DependentUpon>
+    </None>
+    <None Include="log\Oscalerter.log" />
+    <None Include="Oscalerter.exe.X.config">
+      <DependentUpon>App.config</DependentUpon>
+    </None>
     <None Include="Properties\launchSettings.json" />
-    <None Include="config\dev\run-as-admin-to-start-as-a-win7-service.cmd" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data.Interfaces\IClassOneDb.cs" />
@@ -116,7 +138,6 @@
     <Compile Include="Models\Class_biz_notifications.cs" />
     <Compile Include="Models\ObjectBiz.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Program.Service.cs" />
     <Compile Include="Scrape.Interface\IClass_ss_cad_provider.cs" />
     <Compile Include="Scrape\Class_ss.cs" />
     <Compile Include="Scrape\Class_ss_broadcastify.cs" />

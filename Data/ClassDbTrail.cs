@@ -5,7 +5,7 @@ using System.Configuration;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace OscalertSvc.Data
+namespace Oscalerter.Data
   {
   public class ClassDbTrail : ClassMysqlDb
     {

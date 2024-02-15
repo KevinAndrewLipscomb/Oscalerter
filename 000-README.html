@@ -29,7 +29,7 @@ class="ecsx-1095">Abstract</span>
       <!--l. 34--><p class="noindent" ><span 
 class="ecss-1095">This document describes additional steps that you must perform, after checking out the</span>
       <span 
-class="ecss-1095">OscalertSvc project from its repository, to achieve a clean compilation or to execute the</span>
+class="ecss-1095">Oscalerter project from its repository, to achieve a clean compilation or to execute the</span>
       <span 
 class="ecss-1095">application. This document does not cover how to meet other prerequisites, such as setting</span>
       <span 
@@ -40,7 +40,7 @@ class="ecss-1095">creating and populating the database schema.</span>
 <!--l. 39--><p class="noindent" >The use of <a 
 href="https://en.wikipedia.org/wiki/NTFS_reparse_point" >NTFS reparse points</a> is recommended in this document because it allows versioning
 operations to take place without undesirable impact to project environments, and without violating
-versioning rules. If you simply exported (or downloaded as a ZIP) OscalertSvc from its origin
+versioning rules. If you simply exported (or downloaded as a ZIP) Oscalerter from its origin
 repository and you do not intend to perform subsequent updates or any other versioning
 operations on it (not recommended), you can simply make copies instead of NTFS reparse
 points.
@@ -52,12 +52,12 @@ points.
 <!--l. 43--><p class="noindent" >
 <h4 class="subsectionHead"><span class="titlemark">2.1   </span> <a 
  id="x1-30002.1"></a>Hook up the KiDotnetFoundation project (only if compiling)</h4>
-<!--l. 45--><p class="noindent" >OscalertSvc uses object code from the KiDotnetFoundation adjunct project. The KiDotnetFoundation is
+<!--l. 45--><p class="noindent" >Oscalerter uses object code from the KiDotnetFoundation adjunct project. The KiDotnetFoundation is
 used by multiple production-eligible projects and its source code is version controlled independently from
 those production-eligible projects. The object code is already provided as <span 
-class="ecsi-1200">OscalertSvc/bin/ki.dll </span>to
-enable execution of OscalertSvc in a production environment, but to hook up the KiDotnetFoundation
-project for the sake of a clean compile of OscalertSvc, do the following:
+class="ecsi-1200">Oscalerter/bin/ki.dll </span>to
+enable execution of Oscalerter in a production environment, but to hook up the KiDotnetFoundation
+project for the sake of a clean compile of Oscalerter, do the following:
       <ol  class="enumerate1" >
 <li 
   class="enumerate" id="x1-3002x1">
@@ -67,16 +67,16 @@ class="ecsi-1200">https://kveo-it-project.svn.sourceforge.net/svnroot/kveo-it-pr
 class="ecsi-1200">KiDotnetFoundation </span>folder. Make sure the <span 
 class="ecsi-1200">KiDotnetFoundation </span>folder
       is not inside the <span 
-class="ecsi-1200">OscalertSvc </span>folder tree.
+class="ecsi-1200">Oscalerter </span>folder tree.
       </li>
 <li 
   class="enumerate" id="x1-3004x2">
       <!--l. 48--><p class="noindent" >Create a junction reparse point named <span 
 class="ecsi-1200">ki </span>inside the <span 
-class="ecsi-1200">OscalertSvc/lib </span>folder that points to
+class="ecsi-1200">Oscalerter/lib </span>folder that points to
       the <span 
 class="ecsi-1200">KiDotnetFoundation </span>folder. You should end up with a folder inside the <span 
-class="ecsi-1200">OscalertSvc/lib</span>
+class="ecsi-1200">Oscalerter/lib</span>
       folder called <span 
 class="ecsi-1200">ki</span>. You can make junction points with <span 
 class="eccc1200-"><span 
@@ -120,18 +120,18 @@ class="small-caps">n</span> </span>tool or, on Vista-based systems (including Wi
       and later systems), the prototype commands would be:<br 
 class="newline" /><br 
 class="newline" /><span 
-class="ecsi-1200">cd OscalertSvc/lib</span><br 
+class="ecsi-1200">cd Oscalerter/lib</span><br 
 class="newline" /><span 
 class="ecsi-1200">mklink /j ki KiDotnetFoundation</span></li></ol>
 <!--l. 54--><p class="noindent" >
 <h4 class="subsectionHead"><span class="titlemark">2.2   </span> <a 
  id="x1-40002.2"></a>Hook up the oscalib project (only if compiling)</h4>
-<!--l. 56--><p class="noindent" >OscalertSvc uses object code from the oscalib adjunct project. The oscalib is used by multiple
+<!--l. 56--><p class="noindent" >Oscalerter uses object code from the oscalib adjunct project. The oscalib is used by multiple
 production-eligible projects and its source code is version controlled independently from those
 production-eligible projects. The object code is already provided as <span 
-class="ecsi-1200">OscalertSvc/bin/oscalib.dll </span>to enable
-execution of OscalertSvc in a production environment, but to hook up the oscalib project for the sake of
-a clean compile of OscalertSvc, do the following:
+class="ecsi-1200">Oscalerter/bin/oscalib.dll </span>to enable
+execution of Oscalerter in a production environment, but to hook up the oscalib project for the sake of
+a clean compile of Oscalerter, do the following:
                                                                                          
                                                                                          
       <ol  class="enumerate1" >
@@ -143,17 +143,17 @@ class="ecsi-1200">https://kveo-it-project.svn.sourceforge.net/svnroot/kveo-it-pr
       project. Put it in an <span 
 class="ecsi-1200">oscalib </span>folder. Make sure the <span 
 class="ecsi-1200">oscalib </span>folder is not inside the <span 
-class="ecsi-1200">OscalertSvc</span>
+class="ecsi-1200">Oscalerter</span>
       folder tree.
       </li>
 <li 
   class="enumerate" id="x1-4004x2">
       <!--l. 59--><p class="noindent" >Create a junction reparse point named <span 
 class="ecsi-1200">oscalib </span>inside the <span 
-class="ecsi-1200">OscalertSvc/lib </span>folder that points
+class="ecsi-1200">Oscalerter/lib </span>folder that points
       to the <span 
 class="ecsi-1200">oscalib </span>folder. You should end up with a folder inside the <span 
-class="ecsi-1200">OscalertSvc/lib </span>folder
+class="ecsi-1200">Oscalerter/lib </span>folder
       called <span 
 class="ecsi-1200">oscalib</span>. You can make junction points with <span 
 class="eccc1200-"><span 
@@ -197,29 +197,29 @@ class="small-caps">n</span> </span>tool or, on Vista-based systems (including Wi
       and later systems), the prototype commands would be:<br 
 class="newline" /><br 
 class="newline" /><span 
-class="ecsi-1200">cd OscalertSvc/lib</span><br 
+class="ecsi-1200">cd Oscalerter/lib</span><br 
 class="newline" /><span 
 class="ecsi-1200">mklink /j oscalib oscalib</span></li></ol>
 <!--l. 65--><p class="noindent" >
 <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
  id="x1-50003"></a>Put appropriate config files in the appropriate application folders</h3>
-<!--l. 67--><p class="noindent" >OscalertSvc will not run without <span 
-class="ecsi-1200">OscalertSvc.exe.config </span>and <span 
+<!--l. 67--><p class="noindent" >Oscalerter will not run without <span 
+class="ecsi-1200">Oscalerter.exe.config </span>and <span 
 class="ecsi-1200">unpublished.config </span>files in its <span 
 class="ecsi-1200">bin </span>folder.
 Because the contents of those files are environment-specific, and we wish to keep the rest of the
-OscalertSvc folder tree environment-neutral, those config files are kept in the <span 
-class="ecsi-1200">OscalertSvc/config</span>
+Oscalerter folder tree environment-neutral, those config files are kept in the <span 
+class="ecsi-1200">Oscalerter/config</span>
 subfolder tree. To put config files that are appropriate for your environment into the <span 
-class="ecsi-1200">OscalertSvc/bin</span>
+class="ecsi-1200">Oscalerter/bin</span>
 folder, do the following:
       <ol  class="enumerate1" >
 <li 
   class="enumerate" id="x1-5002x1">
       <!--l. 69--><p class="noindent" >Copy the <span 
-class="ecsi-1200">OscalertSvc/config/template-unpublished.config-template </span>file to an appropriate
+class="ecsi-1200">Oscalerter/config/template-unpublished.config-template </span>file to an appropriate
       subfolder of <span 
-class="ecsi-1200">OscalertSvc/config</span>, rename it to <span 
+class="ecsi-1200">Oscalerter/config</span>, rename it to <span 
 class="ecsi-1200">unpublished.config</span>, and revise its contents
       appropriately. <span 
 class="ecsx-1200">Do not add any </span><span 
@@ -230,9 +230,9 @@ class="ecsx-1200">file to any public repository.</span>
   class="enumerate" id="x1-5004x2">
       <!--l. 70--><p class="noindent" >Copy the appropriate <span 
 class="ecsi-1200">unpublished.config </span>file from within the <span 
-class="ecsi-1200">OscalertSvc/config </span>folder tree
+class="ecsi-1200">Oscalerter/config </span>folder tree
       to the <span 
-class="ecsi-1200">OscalertSvc/bin </span>folder.
+class="ecsi-1200">Oscalerter/bin </span>folder.
                                                                                          
                                                                                          
       </li>
@@ -240,20 +240,20 @@ class="ecsi-1200">OscalertSvc/bin </span>folder.
   class="enumerate" id="x1-5006x3">
       <!--l. 71--><p class="noindent" >Copy the appropriate <span 
 class="ecsi-1200">App.config </span>file from within the <span 
-class="ecsi-1200">OscalertSvc/config </span>folder tree to the
+class="ecsi-1200">Oscalerter/config </span>folder tree to the
       <span 
-class="ecsi-1200">OscalertSvc/bin </span>folder and rename it to <span 
-class="ecsi-1200">OscalertSvc.exe.config</span>.</li></ol>
+class="ecsi-1200">Oscalerter/bin </span>folder and rename it to <span 
+class="ecsi-1200">Oscalerter.exe.config</span>.</li></ol>
 <!--l. 73--><p class="noindent" >From the Windows command line, the prototype commands would be:<br 
 class="newline" /><br 
 class="newline" /><span 
-class="ecsi-1200">cd OscalertSvc</span><br 
+class="ecsi-1200">cd Oscalerter</span><br 
 class="newline" /><span 
 class="ecsi-1200">mklink bin/unpublished.config config/</span>{appropriate-path}/<span 
 class="ecsi-1200">unpublished.config</span><br 
 class="newline" /><span 
 class="ecsi-1200">copy config/</span>{appropriate-path}/<span 
-class="ecsi-1200">App.config bin/OscalertSvc.exe.config</span>
+class="ecsi-1200">App.config bin/Oscalerter.exe.config</span>
  
 </body></html> 
 

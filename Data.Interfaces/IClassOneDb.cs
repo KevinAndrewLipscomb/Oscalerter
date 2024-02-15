@@ -1,4 +1,4 @@
-﻿namespace OscalertSvc.Data
+﻿namespace Oscalerter.Data
   {
   public interface IClassOneDb
     {

@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "OscalertSvc": {
+    "Oscalerter": {
       "commandName": "Project",
       "nativeDebugging": true
     }
