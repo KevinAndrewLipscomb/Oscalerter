@@ -7,7 +7,7 @@ schtasks /delete^
 ::
 schtasks /create^
  /tn Oscalerter^
- /tr "C:\Users\KevinAndrewLipscomb\Documents\SANDBOX\vocational\kalipso-infogistics\OWNREPO\Oscalerter\bin\Oscalerter.exe"^
+ /tr "%~dp0..\bin\Oscalerter.exe"^
  /sc onstart^
  /np
 ::
