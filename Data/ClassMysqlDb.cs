@@ -18,7 +18,7 @@ namespace Oscalerter.Data
 
     public ClassMysqlDb() : base() // CONSTRUCTOR
       {
-      the_connection = new MySqlConnection(connectionString:ConfigurationManager.AppSettings["db_connection_string"]);
+      the_connection = new MySqlConnection(connectionString:ConfigurationManager.ConnectionStrings["db_connection_string"].ConnectionString);
       }
 
     protected void Close()

@@ -3,9 +3,9 @@ using Oscalerter.Models;
 using Oscalerter.Scrape.Interface;
 using System;
 using System.Collections.Specialized;
+using System.Configuration;
 using System.Net;
 using System.Threading;
-using static Oscalerter.Scrape.Interface.IClass_ss;
 
 namespace Class_biz_cad_activity_notification_agent
   {
@@ -13,17 +13,16 @@ namespace Class_biz_cad_activity_notification_agent
   public class TClass_biz_cad_activity_notification_agent : ObjectBiz
     {
 
-    readonly private IClass_ss ss_cad_provider = null;
-    readonly private NameValueCollection appSettings = null;
-
     public TClass_biz_cad_activity_notification_agent // CONSTRUCTOR
       (
       IClass_ss ss_cad_provider_imp,
-      NameValueCollection appSettings_imp
+      NameValueCollection appSettings_imp,
+      ConnectionStringSettingsCollection connectionStrings_imp
       )
       {
       ss_cad_provider = ss_cad_provider_imp.WithReport(Report);
       appSettings = appSettings_imp;
+      connectionStrings = connectionStrings_imp;
       }
 
     internal void Work(Biz biz)
@@ -41,7 +40,7 @@ namespace Class_biz_cad_activity_notification_agent
       //
       var cookie_container = new CookieContainer();
       //
-      EmsCadList current_ems_cad_list;
+      IClass_ss.EmsCadList current_ems_cad_list;
       //
       var datetime_of_last_login = DateTime.MinValue;
       var datetime_of_last_nudge = DateTime.Now;
@@ -55,8 +54,8 @@ namespace Class_biz_cad_activity_notification_agent
             ReportProgress(new("Logging into CAD provider..."));
             ss_cad_provider.Login
               (
-              username:appSettings["vbemsbridge_username"],
-              password:appSettings["vbemsbridge_password"],
+              username:connectionStrings["vbemsbridge_username"].ConnectionString,
+              password:connectionStrings["vbemsbridge_password"].ConnectionString,
               cookie_container:cookie_container
               );
             datetime_of_last_login = DateTime.Now;
@@ -174,6 +173,10 @@ namespace Class_biz_cad_activity_notification_agent
           }
         }
       }
+
+    readonly private NameValueCollection appSettings = null;
+    readonly private ConnectionStringSettingsCollection connectionStrings = null;
+    readonly private IClass_ss ss_cad_provider = null;
 
     }
 

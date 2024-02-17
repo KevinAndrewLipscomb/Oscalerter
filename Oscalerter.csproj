@@ -94,16 +94,16 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Content Include="config\Sensitive\000-DO-NOT-VERSION-OR-PUBLISH-OTHER-FILES-IN-THIS-FOLDER.txt" />
-    <Content Include="config\Template\template-sensitiveAppSettings.config-template" />
     <None Include="config\Detail\log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="config\Detail\appSettings.X.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="config\Sensitive\sensitiveAppSettings.config">
+    <None Include="config\Sensitive\connectionStrings.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="config\Template\template-connectionStrings.config-template" />
     <None Include="Directory.Build.props" />
     <None Include="noninteractive\.crontab" />
     <None Include="noninteractive\run-as-admin-to-init-scheduled-task-X.cmd" />

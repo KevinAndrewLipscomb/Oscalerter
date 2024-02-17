@@ -304,8 +304,8 @@ namespace Class_ss_broadcastify
       if(!Request_www_broadcastify_com_Login
           (
           cookie_container:cookie_container,
-          username:ConfigurationManager.AppSettings["broadcastify_username"],
-          password:ConfigurationManager.AppSettings["broadcastify_password"],
+          username:ConfigurationManager.ConnectionStrings["broadcastify_username"].ConnectionString,
+          password:ConfigurationManager.ConnectionStrings["broadcastify_password"].ConnectionString,
           response:out response
           )
         )
