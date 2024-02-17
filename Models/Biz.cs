@@ -16,10 +16,6 @@ namespace Oscalerter.Models
   public class Biz
     {
 
-    static readonly private NameValueCollection appSettings = ConfigurationManager.AppSettings;
-    static readonly private TClass_db_trail db_trail = new();
-    static readonly private TClass_ss_imagetrendelite ss_cad_provider = new();
-
     static readonly private TClass_db_cad_records db_cad_records = new
       (
       db_trail_imp:db_trail
@@ -28,7 +24,8 @@ namespace Oscalerter.Models
     public TClass_biz_cad_activity_notification_agent cad_activity_notification_agent = new
       (
       ss_cad_provider_imp:ss_cad_provider,
-      appSettings_imp:appSettings
+      appSettings_imp:appSettings,
+      connectionStrings_imp:connectionStrings
       );
     public TClass_biz_cad_records cad_records = new
       (
@@ -36,6 +33,11 @@ namespace Oscalerter.Models
       );
     public TClass_biz_field_situations field_situations = new();
     public TClass_biz_incident_nature_translations incident_nature_translations = new();
+
+    static readonly private NameValueCollection appSettings = ConfigurationManager.AppSettings;
+    static readonly private ConnectionStringSettingsCollection connectionStrings = ConfigurationManager.ConnectionStrings;
+    static readonly private TClass_db_trail db_trail = new();
+    static readonly private TClass_ss_imagetrendelite ss_cad_provider = new();
 
     }
   }

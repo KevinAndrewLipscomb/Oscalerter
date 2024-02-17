@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!---->
+<!-- Place the populated connectionStrings.config file in the ~/config/Sensitive folder and drop a junction to (preferred) or copy the ~/config/Sensitive folder into the ~/bin/config folder. -->
+<!---->
+<connectionStrings>
+  <add name="db_connection_string" connectionString="SERVER=localhost; DATABASE=~; UID=~; PWD=~ki-oscalert-d~password~; TREATTINYASBOOLEAN=false; RESPECTBINARYFLAGS=false; ALLOWUSERVARIABLES=true; DEFAULTCOMMANDTIMEOUT=300;" />
+  <add name="vbemsbridge_username" connectionString="~"/>
+  <add name="vbemsbridge_password" connectionString="~"/>
+  <add name="broadcastify_username" connectionString="~"/>
+  <add name="broadcastify_password" connectionString="~"/>
+</connectionStrings>
