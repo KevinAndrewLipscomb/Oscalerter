@@ -1,3 +1,5 @@
+#Requires -RunAsAdministrator
+#
 $taskName = "Oscalerter"
 Stop-ScheduledTask -TaskName:$taskName |
   Unregister-ScheduledTask
