@@ -173,8 +173,9 @@ namespace Class_db_cad_records
       //
       const string DELIMITER = "~";
       var procedure_name = "MTIODKU_" + ConfigurationManager.AppSettings["application_name"] + "_" + DateTime.Now.Ticks.ToString("D19");
+      var drop_procedure_clause = $" drop procedure if exists {procedure_name}";
       var code = "/* DELIMITER '" + DELIMITER + "' */"
-      + " drop procedure if exists " + procedure_name
+      + drop_procedure_clause
       + DELIMITER
       + " create procedure " + procedure_name + "() modifies sql data"
       +   " BEGIN"
@@ -190,13 +191,22 @@ namespace Class_db_cad_records
       + DELIMITER
       + " call " + procedure_name + "()"
       + DELIMITER
-      + " drop procedure if exists " + procedure_name;
+      + drop_procedure_clause;
       var my_sql_script = new MySqlScript();
       my_sql_script.Connection = connection;
       my_sql_script.Delimiter = DELIMITER;
       my_sql_script.Query = code;
       Open();
-      ExecuteOneOffProcedureScriptWithTolerance(procedure_name,my_sql_script);
+      try
+        {
+        ExecuteOneOffProcedureScriptWithTolerance(procedure_name,my_sql_script);
+        }
+      catch (MySqlException e)
+        {
+        using var my_sql_command = new MySqlCommand(drop_procedure_clause,connection);
+        my_sql_command.ExecuteNonQuery();
+        throw e;
+        }
       ////
       //// Determine if a Nature is known for this record.
       ////
