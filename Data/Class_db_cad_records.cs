@@ -192,16 +192,18 @@ namespace Class_db_cad_records
       + " call " + procedure_name + "()"
       + DELIMITER
       + drop_procedure_clause;
-      var my_sql_script = new MySqlScript();
-      my_sql_script.Connection = connection;
-      my_sql_script.Delimiter = DELIMITER;
-      my_sql_script.Query = code;
+      var my_sql_script = new MySqlScript()
+        {
+        Connection = connection,
+        Delimiter = DELIMITER,
+        Query = code
+        };
       Open();
       try
         {
         ExecuteOneOffProcedureScriptWithTolerance(procedure_name,my_sql_script);
         }
-      catch (MySqlException e)
+      catch (Exception e)
         {
         using var my_sql_command = new MySqlCommand(drop_procedure_clause,connection);
         my_sql_command.ExecuteNonQuery();
