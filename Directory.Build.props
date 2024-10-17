@@ -1,5 +1,0 @@
-<Project>
-  <PropertyGroup Label="In stack traces, reduce source file paths to be relative to solution root">
-    <PathMap>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)'))=~/</PathMap>
-  </PropertyGroup>
-</Project>
