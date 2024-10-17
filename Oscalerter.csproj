@@ -104,7 +104,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="config\Template\template-connectionStrings.config-template" />
-    <None Include="Directory.Build.props" />
     <None Include="noninteractive\.crontab" />
     <None Include="noninteractive\run-as-admin-to-init-scheduled-task-X.cmd" />
     <None Include="noninteractive\run-as-admin-to-init-scheduled-task-P-or-D.cmd" />
