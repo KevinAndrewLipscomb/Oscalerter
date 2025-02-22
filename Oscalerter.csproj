@@ -85,6 +85,9 @@
     <None Include=".gitignore" />
     <None Include="0build.ps1" />
     <None Include="App.config" />
+    <None Include="noninteractive\.crontab" />
+    <None Include="noninteractive\.crontab.headstart.bash" />
+    <None Include="noninteractive\run-as-admin-to-init-scheduled-task.ps1" />
     <None Include="PostBuild.ps1" />
     <None Include="Properties\launchSettings.json" />
     <None Include="work.ps1" />
@@ -154,15 +157,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="lib\000-README-IF-COMPILING.html" />
-    <Content Include="noninteractive\.crontab">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="noninteractive\.crontab.headstart.bash">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="noninteractive\run-as-admin-to-init-scheduled-task.ps1">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Oscalerter.exe.PRODUCTION.config">
       <DependentUpon>App.config</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
