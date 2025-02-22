@@ -4,7 +4,7 @@ $taskName = "Oscalerter"
 Stop-ScheduledTask -TaskName:$taskName |
   Unregister-ScheduledTask
 #
-$action = New-ScheduledTaskAction -Execute:"${PsScriptRoot}\..\Oscalerter.exe"
+$action = New-ScheduledTaskAction -Execute:"${PsScriptRoot}\..\bin\Debug\Oscalerter.exe"
 $description = "Near real-time notifications for certain field situations"
 $principal = New-ScheduledTaskPrincipal -LogonType:S4U -UserId:$env:UserName
 $settings = New-ScheduledTaskSettingsSet -ExecutionTimeLimit:0 -RestartCount:([uint16]::MaxValue) -RestartInterval:00:05:00
