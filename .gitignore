@@ -13,6 +13,5 @@ MigrationBackup/
 packages/
 obj/
 /App.config
-/lib/ki/
 /lib/oscalib/
 /bin/Debug/config/Sensitive/*.config
