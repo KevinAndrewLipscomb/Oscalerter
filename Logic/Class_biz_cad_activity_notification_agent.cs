@@ -28,12 +28,7 @@ namespace Class_biz_cad_activity_notification_agent
 
     internal void Work(Biz biz)
       {
-      var address = k.EMPTY;
       var be_augmenting_enabled = bool.Parse(appSettings["be_augmenting_enabled"]);
-      var current_incident_num = k.EMPTY;
-      var incident_date_time_initialized = k.EMPTY;
-      var nature = k.EMPTY;
-      //var saved_incident_num = k.EMPTY; // for use managing nature
       var saved_meta_surge_alert_timestamp_ems = DateTime.MinValue;
       var saved_meta_surge_alert_timestamp_als = DateTime.MinValue;
       var saved_meta_surge_alert_timestamp_fire = DateTime.MinValue;
@@ -82,50 +77,9 @@ namespace Class_biz_cad_activity_notification_agent
             request_identifier = current_ems_cad_list.RequestIdentifier;
             var rows = current_ems_cad_list.Records;
             Report.Debug("Parsing provider's current CAD records and establishing them in the BizModel...");
-            for (var i = new k.subtype<int>(0,rows.Count); i.val < i.LAST; i.val++)
+            foreach (var row in rows)
               {
-              var cells = rows[i.val].Columns;
-              address = cells.Where(cell => cell.Name == "StreetAddress").Single().Value;
-              current_incident_num = cells.Where(cell => cell.Name == "IncidentNumber").Single().Value;
-              incident_date_time_initialized = cells.Where(cell => cell.Name == "PSAP").Single().Value;
-              if(
-                  (incident_date_time_initialized.Length > 1) // there is an incident_date/time_initialized
-                &&
-                  (address.Length > 1) // there is an address
-                &&
-                  (
-                    current_incident_num.StartsWith("E") // this is an EMS incident whose number starts with EMS
-                  ||
-                    current_incident_num.StartsWith("F") // this if a fire incident whose number starts with FD
-                  )
-                )
-                {
-                //if (current_incident_num != saved_incident_num)
-                //  {
-                //  //
-                //  // Determine nature, if supported.
-                //  //
-                //  }
-                biz.cad_records.Set
-                  (
-                  id:k.EMPTY,
-                  incident_date:(incident_date_time_initialized.Split())[0],
-                  incident_num:current_incident_num,
-                  incident_address:k.Safe(address,k.safe_hint_type.PUNCTUATED),
-                  call_sign:cells.Where(cell => cell.Name == "EMSUnitCallSign").Single().Value,
-                  time_initialized:(incident_date_time_initialized.Split())[1],
-                  time_of_alarm:(cells.Where(cell => cell.Name == "UnitNotifiedByDispatch").Single().Value.Contains(k.SPACE) ? (cells.Where(cell => cell.Name == "UnitNotifiedByDispatch").Single().Value.Split())[1] : k.EMPTY),
-                  time_enroute:(cells.Where(cell => cell.Name == "UnitEnroute").Single().Value.Contains(k.SPACE) ? (cells.Where(cell => cell.Name == "UnitEnroute").Single().Value.Split())[1] : k.EMPTY),
-                  time_on_scene:(cells.Where(cell => cell.Name == "UnitArrivedOnScene").Single().Value.Contains(k.SPACE) ? (cells.Where(cell => cell.Name == "UnitArrivedOnScene").Single().Value.Split())[1] : k.EMPTY),
-                  time_transporting:(cells.Where(cell => cell.Name == "UnitLeftScene").Single().Value.Contains(k.SPACE) ? (cells.Where(cell => cell.Name == "UnitLeftScene").Single().Value.Split())[1] : k.EMPTY),
-                  time_at_hospital:(cells.Where(cell => cell.Name == "PatientArrivedAtDestination").Single().Value.Contains(k.SPACE) ? (cells.Where(cell => cell.Name == "PatientArrivedAtDestination").Single().Value.Split())[1] : k.EMPTY),
-                  time_available:(cells.Where(cell => cell.Name == "UnitBackInService").Single().Value.Contains(k.SPACE) ? (cells.Where(cell => cell.Name == "UnitBackInService").Single().Value.Split())[1] : k.EMPTY),
-                  time_downloaded:k.EMPTY,
-                  nature:nature
-                  );
-                //saved_incident_num = current_incident_num; // for use managing nature
-                }
-              cells.Clear();
+              ParseAndEstablish(biz,row);
               }
             rows.Clear();
             Report.Debug("Parsing and establishment complete.");
@@ -163,6 +117,57 @@ namespace Class_biz_cad_activity_notification_agent
           Report.Warning("Pausing to recover...");
           Thread.Sleep(millisecondsTimeout:int.Parse(appSettings["recovery_interval_minutes"]));
           datetime_of_last_login = DateTime.MinValue;
+          }
+        }
+
+      static void ParseAndEstablish
+        (
+        Biz biz,
+        IClass_ss.Record row
+        )
+        {
+        var cells = row.Columns;
+        var address = cells.Where(cell => cell.Name == "StreetAddress").Single().Value;
+        var current_incident_num = cells.Where(cell => cell.Name == "IncidentNumber").Single().Value;
+        var incident_date_time_initialized = cells.Where(cell => cell.Name == "PSAP").Single().Value;
+        var nature = k.EMPTY;
+        //var saved_incident_num = k.EMPTY; // for use managing nature
+        if (
+            (incident_date_time_initialized.Length > 1) // there is an incident_date/time_initialized
+          &&
+            (address.Length > 1) // there is an address
+          &&
+            (
+              current_incident_num.StartsWith("E") // this is an EMS incident whose number starts with EMS
+            ||
+              current_incident_num.StartsWith("F") // this if a fire incident whose number starts with FD
+            )
+          )
+          {
+          //if (current_incident_num != saved_incident_num)
+          //  {
+          //  //
+          //  // Determine nature, if supported.
+          //  //
+          //  }
+          biz.cad_records.Set
+            (
+            id: k.EMPTY,
+            incident_date: (incident_date_time_initialized.Split())[0],
+            incident_num: current_incident_num,
+            incident_address: k.Safe(address, k.safe_hint_type.PUNCTUATED),
+            call_sign: cells.Where(cell => cell.Name == "EMSUnitCallSign").Single().Value,
+            time_initialized: (incident_date_time_initialized.Split())[1],
+            time_of_alarm: (cells.Where(cell => cell.Name == "UnitNotifiedByDispatch").Single().Value.Contains(k.SPACE) ? (cells.Where(cell => cell.Name == "UnitNotifiedByDispatch").Single().Value.Split())[1] : k.EMPTY),
+            time_enroute: (cells.Where(cell => cell.Name == "UnitEnroute").Single().Value.Contains(k.SPACE) ? (cells.Where(cell => cell.Name == "UnitEnroute").Single().Value.Split())[1] : k.EMPTY),
+            time_on_scene: (cells.Where(cell => cell.Name == "UnitArrivedOnScene").Single().Value.Contains(k.SPACE) ? (cells.Where(cell => cell.Name == "UnitArrivedOnScene").Single().Value.Split())[1] : k.EMPTY),
+            time_transporting: (cells.Where(cell => cell.Name == "UnitLeftScene").Single().Value.Contains(k.SPACE) ? (cells.Where(cell => cell.Name == "UnitLeftScene").Single().Value.Split())[1] : k.EMPTY),
+            time_at_hospital: (cells.Where(cell => cell.Name == "PatientArrivedAtDestination").Single().Value.Contains(k.SPACE) ? (cells.Where(cell => cell.Name == "PatientArrivedAtDestination").Single().Value.Split())[1] : k.EMPTY),
+            time_available: (cells.Where(cell => cell.Name == "UnitBackInService").Single().Value.Contains(k.SPACE) ? (cells.Where(cell => cell.Name == "UnitBackInService").Single().Value.Split())[1] : k.EMPTY),
+            time_downloaded: k.EMPTY,
+            nature: nature
+            );
+          //saved_incident_num = current_incident_num; // for use managing nature
           }
         }
       }
