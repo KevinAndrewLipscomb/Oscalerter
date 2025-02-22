@@ -9,12 +9,10 @@
 .svn/
 .vs/
 bin/*.xml
-obj/
 MigrationBackup/
 packages/
-unpublished.*
+obj/
 /App.config
-/config/Sensitive/*.config
 /lib/ki/
 /lib/oscalib/
-
+/bin/Debug/config/Sensitive/*.config

@@ -1,7 +1,7 @@
 ﻿using kix;
 using log4net;
 using log4net.Config;
-using Oscalerter.Models;
+using Oscalerter.Logic;
 using Spectre.Console;
 using System;
 using System.Collections.Generic;

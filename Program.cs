@@ -1,4 +1,4 @@
-﻿using Oscalerter.Models;
+﻿using Oscalerter.Logic;
 using Oscalerter.Views;
 using System;
 using System.Diagnostics;

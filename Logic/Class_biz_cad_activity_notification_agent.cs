@@ -1,5 +1,5 @@
 using kix;
-using Oscalerter.Models;
+using Oscalerter.Logic;
 using Oscalerter.Scrape.Interface;
 using System;
 using System.Collections.Specialized;

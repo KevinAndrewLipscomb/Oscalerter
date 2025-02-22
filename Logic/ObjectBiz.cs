@@ -1,7 +1,7 @@
 ﻿using ki.mvc;
 using System;
 
-namespace Oscalerter.Models
+namespace Oscalerter.Logic
   {
   public abstract class ObjectBiz
     {
