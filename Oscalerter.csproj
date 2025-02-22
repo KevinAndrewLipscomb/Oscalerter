@@ -1,5 +1,5 @@
-﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
+﻿<Project ToolsVersion="Current" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Application">
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProjectGuid>{DBBE1791-221C-40C9-9402-F0BBAED84CF3}</ProjectGuid>
@@ -33,7 +33,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -54,16 +54,16 @@
     <Prefer32Bit>false</Prefer32Bit>
     <LangVersion>preview</LangVersion>
   </PropertyGroup>
-  <PropertyGroup>
+  <PropertyGroup Label="Namespace">
     <RootNamespace>Oscalerter</RootNamespace>
   </PropertyGroup>
-  <PropertyGroup>
+  <PropertyGroup Label="AutoGenerateBindingRedirects">
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
-  <PropertyGroup>
+  <PropertyGroup Label="StartupObject">
     <StartupObject>Oscalerter.Program</StartupObject>
   </PropertyGroup>
-  <ItemGroup>
+  <ItemGroup Label="Reference">
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -80,30 +80,29 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
-  <ItemGroup>
+  <ItemGroup Label="None">
     <None Include=".editorconfig" />
-    <None Include="0build.cmd" />
+    <None Include=".gitignore" />
+    <None Include="0build.ps1" />
     <None Include="App.config" />
-    <None Include="App.DEVELOPMENT.config">
-      <DependentUpon>App.config</DependentUpon>
-    </None>
     <None Include="config\Detail\appSettings.DEVELOPMENT.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="config\Detail\appSettings.PRODUCTION.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <Content Include="config\Sensitive\000-DO-NOT-VERSION-OR-PUBLISH-OTHER-FILES-IN-THIS-FOLDER.txt" />
+    <Content Include="config\Sensitive\000-DO-NOT-VERSION-OR-PUBLISH-OTHER-FILES-IN-THIS-FOLDER.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="config\Detail\log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="config\Detail\appSettings.X.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="config\Sensitive\connectionStrings.config">
+    <Content Include="config\Template\connectionStrings.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="config\Template\template-connectionStrings.config-template" />
+    </Content>
     <None Include="noninteractive\.crontab" />
     <None Include="noninteractive\run-as-admin-to-init-scheduled-task-X.cmd" />
     <None Include="noninteractive\run-as-admin-to-init-scheduled-task-P-or-D.cmd" />
@@ -111,13 +110,14 @@
     <None Include="Oscalerter.exe.PRODUCTION.config">
       <DependentUpon>App.config</DependentUpon>
     </None>
-    <None Include="log\Oscalerter.log" />
     <None Include="Oscalerter.exe.X.config">
       <DependentUpon>App.config</DependentUpon>
     </None>
+    <None Include="PostBuild.ps1" />
     <None Include="Properties\launchSettings.json" />
+    <None Include="work.ps1" />
   </ItemGroup>
-  <ItemGroup>
+  <ItemGroup Label="Compile">
     <Compile Include="Data.Interfaces\IClassOneDb.cs" />
     <Compile Include="Data\ClassDbTrail.cs" />
     <Compile Include="Data\ClassMysqlDb.cs" />
@@ -128,23 +128,23 @@
     <Compile Include="Data\Class_db_notifications.cs" />
     <Compile Include="Data\Class_db_oscalert_logs.cs" />
     <Compile Include="Data\Class_db__information_schema.cs" />
-    <Compile Include="Models\Biz.cs" />
-    <Compile Include="Models\ClassOneBiz.cs" />
-    <Compile Include="Models\Class_biz_cad_activity_notification_agent.cs" />
-    <Compile Include="Models\Class_biz_cad_records.cs" />
-    <Compile Include="Models\Class_biz_field_situations.cs" />
-    <Compile Include="Models\Class_biz_field_situation_impressions.cs" />
-    <Compile Include="Models\Class_biz_notifications.cs" />
-    <Compile Include="Models\ObjectBiz.cs" />
+    <Compile Include="Logic\Biz.cs" />
+    <Compile Include="Logic\ClassOneBiz.cs" />
+    <Compile Include="Logic\Class_biz_cad_activity_notification_agent.cs" />
+    <Compile Include="Logic\Class_biz_cad_records.cs" />
+    <Compile Include="Logic\Class_biz_field_situations.cs" />
+    <Compile Include="Logic\Class_biz_field_situation_impressions.cs" />
+    <Compile Include="Logic\Class_biz_notifications.cs" />
+    <Compile Include="Logic\ObjectBiz.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Scrape.Interface\IClass_ss_cad_provider.cs" />
     <Compile Include="Scrape\Class_ss.cs" />
     <Compile Include="Scrape\Class_ss_broadcastify.cs" />
     <Compile Include="Scrape\Class_ss_emsbridge.cs" />
     <Compile Include="Scrape\Class_ss_imagetrendelite.cs" />
-    <Compile Include="Views\ClassOneInteraction.cs" />
+    <Compile Include="Views\MainInteraction.cs" />
   </ItemGroup>
-  <ItemGroup>
+  <ItemGroup Label="BootstrapperPackage">
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
@@ -156,10 +156,10 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
+  <ItemGroup Label="Content">
     <Content Include="lib\000-README-IF-COMPILING.html" />
   </ItemGroup>
-  <ItemGroup>
+  <ItemGroup Label="ProjectReference">
     <ProjectReference Include="lib\ki\ki.csproj">
       <Project>{a20c347b-5154-47b9-a275-36157bf73352}</Project>
       <Name>ki</Name>
@@ -169,7 +169,7 @@
       <Name>oscalib</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
+  <ItemGroup Label="PackageReference">
     <PackageReference Include="HtmlAgilityPack">
       <Version>1.11.53</Version>
     </PackageReference>
@@ -183,8 +183,14 @@
       <Version>0.47.0</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
     <VisualStudio AllowExistingFolder="true" />
   </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>PowerShell -ExecutionPolicy Bypass ..\..\PostBuild.ps1</PostBuildEvent>
+  </PropertyGroup>
 </Project>

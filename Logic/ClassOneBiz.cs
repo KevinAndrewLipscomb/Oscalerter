@@ -2,7 +2,7 @@
 using System.Collections.Specialized;
 using System.Threading;
 
-namespace Oscalerter.Models
+namespace Oscalerter.Logic
   {
   public class ClassOneBiz : ObjectBiz
     {
