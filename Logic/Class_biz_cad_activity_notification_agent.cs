@@ -4,6 +4,7 @@ using Oscalerter.Scrape.Interface;
 using System;
 using System.Collections.Specialized;
 using System.Configuration;
+using System.Linq;
 using System.Net;
 using System.Threading;
 
@@ -84,26 +85,18 @@ namespace Class_biz_cad_activity_notification_agent
             for (var i = new k.subtype<int>(0,rows.Count); i.val < i.LAST; i.val++)
               {
               var cells = rows[i.val].Columns;
-              //
-              // Remove the IncidentNumberNotValue cell if it exists in this record.  It only appears in some records.
-              //
-              if (cells.Count == 19)
-                {
-                cells.RemoveAt(2);
-                }
-              //
-              address = cells[4].Value;
-              current_incident_num = cells[1].Value;
-              incident_date_time_initialized = cells[9].Value;
+              address = cells.Where(cell => cell.Name == "StreetAddress").Single().Value;
+              current_incident_num = cells.Where(cell => cell.Name == "IncidentNumber").Single().Value;
+              incident_date_time_initialized = cells.Where(cell => cell.Name == "PSAP").Single().Value;
               if(
                   (incident_date_time_initialized.Length > 1) // there is an incident_date/time_initialized
                 &&
                   (address.Length > 1) // there is an address
                 &&
                   (
-                    (current_incident_num[0] == 'E') // this is an EMS incident whose number starts with EMS
+                    current_incident_num.StartsWith("E") // this is an EMS incident whose number starts with EMS
                   ||
-                    (current_incident_num[0] == 'F') // this if a fire incident whose number starts with FD
+                    current_incident_num.StartsWith("F") // this if a fire incident whose number starts with FD
                   )
                 )
                 {
@@ -119,14 +112,14 @@ namespace Class_biz_cad_activity_notification_agent
                   incident_date:(incident_date_time_initialized.Split())[0],
                   incident_num:current_incident_num,
                   incident_address:k.Safe(address,k.safe_hint_type.PUNCTUATED),
-                  call_sign:cells[6].Value,
+                  call_sign:cells.Where(cell => cell.Name == "EMSUnitCallSign").Single().Value,
                   time_initialized:(incident_date_time_initialized.Split())[1],
-                  time_of_alarm:(cells[0].Value.Contains(k.SPACE) ? (cells[0].Value.Split())[1] : k.EMPTY),
-                  time_enroute:(cells[10].Value.Contains(k.SPACE) ? (cells[10].Value.Split())[1] : k.EMPTY),
-                  time_on_scene:(cells[16].Value.Contains(k.SPACE) ? (cells[16].Value.Split())[1] : k.EMPTY),
-                  time_transporting:(cells[12].Value.Contains(k.SPACE) ? (cells[12].Value.Split())[1] : k.EMPTY),
-                  time_at_hospital:(cells[13].Value.Contains(k.SPACE) ? (cells[13].Value.Split())[1] : k.EMPTY),
-                  time_available:(cells[14].Value.Contains(k.SPACE) ? (cells[14].Value.Split())[1] : k.EMPTY),
+                  time_of_alarm:(cells.Where(cell => cell.Name == "UnitNotifiedByDispatch").Single().Value.Contains(k.SPACE) ? (cells.Where(cell => cell.Name == "UnitNotifiedByDispatch").Single().Value.Split())[1] : k.EMPTY),
+                  time_enroute:(cells.Where(cell => cell.Name == "UnitEnroute").Single().Value.Contains(k.SPACE) ? (cells.Where(cell => cell.Name == "UnitEnroute").Single().Value.Split())[1] : k.EMPTY),
+                  time_on_scene:(cells.Where(cell => cell.Name == "UnitArrivedOnScene").Single().Value.Contains(k.SPACE) ? (cells.Where(cell => cell.Name == "UnitArrivedOnScene").Single().Value.Split())[1] : k.EMPTY),
+                  time_transporting:(cells.Where(cell => cell.Name == "UnitLeftScene").Single().Value.Contains(k.SPACE) ? (cells.Where(cell => cell.Name == "UnitLeftScene").Single().Value.Split())[1] : k.EMPTY),
+                  time_at_hospital:(cells.Where(cell => cell.Name == "PatientArrivedAtDestination").Single().Value.Contains(k.SPACE) ? (cells.Where(cell => cell.Name == "PatientArrivedAtDestination").Single().Value.Split())[1] : k.EMPTY),
+                  time_available:(cells.Where(cell => cell.Name == "UnitBackInService").Single().Value.Contains(k.SPACE) ? (cells.Where(cell => cell.Name == "UnitBackInService").Single().Value.Split())[1] : k.EMPTY),
                   time_downloaded:k.EMPTY,
                   nature:nature
                   );

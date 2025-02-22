@@ -8,12 +8,12 @@ using System.Collections.Generic;
 
 namespace Oscalerter.Views
 {
-  class ClassOneInteraction
+  class MainInteraction
     {
     // If any parameters are needed in addition to the command line args, provide a Get() method that prompts the user
     // for, and returns, such parameters.  If used by the controller inside a loop, expose BeQuitRequested.
 
-    static readonly private ILog log = LogManager.GetLogger(typeof(ClassOneInteraction));
+    static readonly private ILog log = LogManager.GetLogger(typeof(MainInteraction));
 
     private readonly bool BeUsingProgressWriteLines = false;
     private readonly List<ConsoleKey> quitKeyList = new()
@@ -27,7 +27,7 @@ namespace Oscalerter.Views
     public event EventHandler OnQuitCommanded;
     protected virtual void ReportQuitCommanded() => OnQuitCommanded?.Invoke(this,null);
 
-    public ClassOneInteraction() // CONSTRUCTOR
+    public MainInteraction() // CONSTRUCTOR
       {
       XmlConfigurator.Configure(); // reads log4net configuration
       var message = "To quit, press any of ";

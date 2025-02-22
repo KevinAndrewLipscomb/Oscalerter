@@ -142,7 +142,7 @@
     <Compile Include="Scrape\Class_ss_broadcastify.cs" />
     <Compile Include="Scrape\Class_ss_emsbridge.cs" />
     <Compile Include="Scrape\Class_ss_imagetrendelite.cs" />
-    <Compile Include="Views\ClassOneInteraction.cs" />
+    <Compile Include="Views\MainInteraction.cs" />
   </ItemGroup>
   <ItemGroup Label="BootstrapperPackage">
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">

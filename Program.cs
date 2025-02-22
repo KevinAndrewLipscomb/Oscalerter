@@ -16,7 +16,7 @@ namespace Oscalerter
     static readonly private Biz biz = new();
       // COMPOSITION ROOT; exposes elements of the MODEL
 
-    static private ClassOneInteraction classOneInteraction;
+    static private MainInteraction classOneInteraction;
 
     /// <summary>
     /// Serves as the CONTROLLER
@@ -25,7 +25,7 @@ namespace Oscalerter
     static void Main(string[] args)
       {
 
-      classOneInteraction = new ClassOneInteraction();
+      classOneInteraction = new MainInteraction();
         // An Interaction acts as a VIEW.
 
       try
