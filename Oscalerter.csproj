@@ -40,7 +40,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Prefer32Bit>false</Prefer32Bit>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-    <CodeAnalysisRuleSet>lib\ki\ki.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\KiDotnetFoundation\ki.ruleset</CodeAnalysisRuleSet>
     <LangVersion>preview</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
@@ -91,27 +91,19 @@
     <None Include="config\Detail\appSettings.PRODUCTION.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <Content Include="config\Sensitive\000-DO-NOT-VERSION-OR-PUBLISH-OTHER-FILES-IN-THIS-FOLDER.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="config\Detail\log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="config\Detail\appSettings.X.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <Content Include="config\Template\connectionStrings.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <None Include="noninteractive\.crontab" />
-    <None Include="noninteractive\run-as-admin-to-init-scheduled-task-X.cmd" />
-    <None Include="noninteractive\run-as-admin-to-init-scheduled-task-P-or-D.cmd" />
-    <None Include="noninteractive\.crontab.headstart.bash" />
     <None Include="Oscalerter.exe.PRODUCTION.config">
       <DependentUpon>App.config</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Oscalerter.exe.X.config">
       <DependentUpon>App.config</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="PostBuild.ps1" />
     <None Include="Properties\launchSettings.json" />
@@ -157,10 +149,25 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup Label="Content">
+    <Content Include="config\Sensitive\000-DO-NOT-VERSION-OR-PUBLISH-OTHER-FILES-IN-THIS-FOLDER.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="config\Template\connectionStrings.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="lib\000-README-IF-COMPILING.html" />
+    <Content Include="noninteractive\.crontab">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="noninteractive\.crontab.headstart.bash">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="noninteractive\run-as-admin-to-init-scheduled-task.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup Label="ProjectReference">
-    <ProjectReference Include="lib\ki\ki.csproj">
+    <ProjectReference Include="..\KiDotnetFoundation\ki.csproj">
       <Project>{a20c347b-5154-47b9-a275-36157bf73352}</Project>
       <Name>ki</Name>
     </ProjectReference>
