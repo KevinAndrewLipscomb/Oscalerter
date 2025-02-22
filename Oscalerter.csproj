@@ -85,26 +85,6 @@
     <None Include=".gitignore" />
     <None Include="0build.ps1" />
     <None Include="App.config" />
-    <None Include="config\Detail\appSettings.DEVELOPMENT.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="config\Detail\appSettings.PRODUCTION.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="config\Detail\log4net.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="config\Detail\appSettings.X.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Oscalerter.exe.PRODUCTION.config">
-      <DependentUpon>App.config</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Oscalerter.exe.X.config">
-      <DependentUpon>App.config</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="PostBuild.ps1" />
     <None Include="Properties\launchSettings.json" />
     <None Include="work.ps1" />
@@ -149,6 +129,24 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup Label="Content">
+    <Content Include="config\Detail\appSettings.DEVELOPMENT.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="config\Detail\appSettings.PRODUCTION.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="config\Detail\log4net.PRODUCTION.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="config\Detail\log4net.X.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="config\Detail\log4net.DEVELOPMENT.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="config\Detail\appSettings.X.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="config\Sensitive\000-DO-NOT-VERSION-OR-PUBLISH-OTHER-FILES-IN-THIS-FOLDER.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -163,6 +161,14 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="noninteractive\run-as-admin-to-init-scheduled-task.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Oscalerter.exe.PRODUCTION.config">
+      <DependentUpon>App.config</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Oscalerter.exe.X.config">
+      <DependentUpon>App.config</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
