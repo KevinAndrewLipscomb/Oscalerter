@@ -27,7 +27,7 @@ namespace Class_db_field_situation_impressions
       Open();
       try
         {
-        using var my_sql_command = new MySqlCommand(db_trail.Saved("delete from field_situation_impression where id = \"" + id + "\""), connection);
+        using var my_sql_command = new MySqlCommand(db_trail.Saved("delete from field_situation_impression where id = \"" + id + "\""), Connection);
         my_sql_command.ExecuteNonQuery();
         }
       catch(System.Exception e)
@@ -48,7 +48,7 @@ namespace Class_db_field_situation_impressions
     internal string ElaborationOfDescription(string description)
       {
       Open();
-      using var my_sql_command = new MySqlCommand("select elaboration from field_situation_impression where description = '" + description + "'",connection);
+      using var my_sql_command = new MySqlCommand("select elaboration from field_situation_impression where description = '" + description + "'",Connection);
       var elaboration_of_description = my_sql_command.ExecuteScalar().ToString();
       Close();
       return elaboration_of_description;
@@ -66,7 +66,7 @@ namespace Class_db_field_situation_impressions
       var result = false;
       //
       Open();
-      using var my_sql_command = new MySqlCommand("select * from field_situation_impression where CAST(id AS CHAR) = \"" + id + "\"", connection);
+      using var my_sql_command = new MySqlCommand("select * from field_situation_impression where CAST(id AS CHAR) = \"" + id + "\"", Connection);
       var dr = my_sql_command.ExecuteReader();
       if (dr.Read())
         {
@@ -88,7 +88,7 @@ namespace Class_db_field_situation_impressions
       )
       {
       Open();
-      using var my_sql_command = new MySqlCommand("select id,description,elaboration from field_situation_impression where pecking_order = '" + pecking_order.val + "'",connection);
+      using var my_sql_command = new MySqlCommand("select id,description,elaboration from field_situation_impression where pecking_order = '" + pecking_order.val + "'",Connection);
       var dr = my_sql_command.ExecuteReader();
       dr.Read();
       id = dr["id"].ToString();
@@ -101,7 +101,7 @@ namespace Class_db_field_situation_impressions
     public int PeckingOrderValOfDescription(string description)
       {
       Open();
-      using var my_sql_command = new MySqlCommand("select pecking_order from field_situation_impression where description = '" + description + "'",connection);
+      using var my_sql_command = new MySqlCommand("select pecking_order from field_situation_impression where description = '" + description + "'",Connection);
       var pecking_order_val_of_description = int.Parse(my_sql_command.ExecuteScalar().ToString());
       Close();
       return pecking_order_val_of_description;
@@ -135,7 +135,7 @@ namespace Class_db_field_situation_impressions
         "SELECT *"
         + " FROM field_situation_impression"
         + " where id = '" + id + "'",
-        connection
+        Connection
         );
       var dr = my_sql_command.ExecuteReader();
       dr.Read();

@@ -16,7 +16,7 @@ namespace Class_db__information_schema
       {
       var engine_innodb_status = k.EMPTY;
       Open();
-      using var my_sql_command = new MySqlCommand("SHOW ENGINE INNODB STATUS",connection);
+      using var my_sql_command = new MySqlCommand("SHOW ENGINE INNODB STATUS",Connection);
       var dr = my_sql_command.ExecuteReader();
       if (dr.Read())
         {

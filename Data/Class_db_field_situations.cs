@@ -83,7 +83,7 @@ namespace Class_db_field_situations
         + " from field_situation"
         +   " join field_situation_impression on (field_situation_impression.id=field_situation.impression_id)"
         ,
-        connection
+        Connection
         );
       var be_meta_surge_fire = "1" == my_sql_command.ExecuteScalar().ToString();
       Close();
@@ -93,7 +93,7 @@ namespace Class_db_field_situations
     internal bool BeMultAlsHolds()
       {
       Open();
-      using var my_sql_command = new MySqlCommand("select IF(sum(num_hzcs) >= 2, 1, 0) from field_situation",connection);
+      using var my_sql_command = new MySqlCommand("select IF(sum(num_hzcs) >= 2, 1, 0) from field_situation",Connection);
       var be_meta_surge_als = "1" == my_sql_command.ExecuteScalar().ToString();
       Close();
       return be_meta_surge_als;
@@ -102,7 +102,7 @@ namespace Class_db_field_situations
     internal bool BeMultAmbHolds()
       {
       Open();
-      using var my_sql_command = new MySqlCommand("select IF(sum(num_holds) >= 2, 1, 0) from field_situation",connection);
+      using var my_sql_command = new MySqlCommand("select IF(sum(num_holds) >= 2, 1, 0) from field_situation",Connection);
       var be_meta_surge_ems = "1" == my_sql_command.ExecuteScalar().ToString();
       Close();
       return be_meta_surge_ems;
@@ -114,7 +114,7 @@ namespace Class_db_field_situations
       Open();
       try
         {
-        using var my_sql_command = new MySqlCommand(db_trail.Saved("delete from field_situation where id = \"" + id + "\""), connection);
+        using var my_sql_command = new MySqlCommand(db_trail.Saved("delete from field_situation where id = \"" + id + "\""), Connection);
         my_sql_command.ExecuteNonQuery();
         }
       catch(Exception e)
@@ -135,7 +135,7 @@ namespace Class_db_field_situations
     internal void DeleteAnyStillStale()
       {
       Open();
-      using var my_sql_command = new MySqlCommand("delete from field_situation where be_stale",connection);
+      using var my_sql_command = new MySqlCommand("delete from field_situation where be_stale",Connection);
       my_sql_command.ExecuteNonQuery();
       Close();
       }
@@ -270,7 +270,7 @@ namespace Class_db_field_situations
         + " group by address"
         + " order by time_initialized desc"
         ,
-        connection
+        Connection
         );
       var dr = my_sql_command.ExecuteReader();
       while (dr.Read())
@@ -420,7 +420,7 @@ namespace Class_db_field_situations
       var result = false;
       //
       Open();
-      using var my_sql_command = new MySqlCommand("select * from field_situation where CAST(id AS CHAR) = \"" + id + "\"", connection);
+      using var my_sql_command = new MySqlCommand("select * from field_situation where CAST(id AS CHAR) = \"" + id + "\"", Connection);
       var dr = my_sql_command.ExecuteReader();
       if (dr.Read())
         {
@@ -490,7 +490,7 @@ namespace Class_db_field_situations
         +     " or"
         +       " assignment like '%,%'"
         +     " )",
-        connection
+        Connection
         );
       var num_considered_active = my_sql_command.ExecuteScalar().ToString();
       Close();
@@ -501,7 +501,7 @@ namespace Class_db_field_situations
       {
       Open();
       using var my_sql_command = new MySqlCommand
-        ("select pecking_order from field_situation join field_situation_impression on (field_situation_impression.id=field_situation.impression_id) where case_num = '" + case_num + "'",connection);
+        ("select pecking_order from field_situation join field_situation_impression on (field_situation_impression.id=field_situation.impression_id) where case_num = '" + case_num + "'",Connection);
       var pecking_order_obj = my_sql_command.ExecuteScalar();
       Close();
       return new k.int_nonnegative((pecking_order_obj == null ? 0 : int.Parse(pecking_order_obj.ToString())));
@@ -510,7 +510,7 @@ namespace Class_db_field_situations
     internal void MarkAllStale()
       {
       Open();
-      using var my_sql_command = new MySqlCommand("update field_situation set be_stale = TRUE",connection);
+      using var my_sql_command = new MySqlCommand("update field_situation set be_stale = TRUE",Connection);
       my_sql_command.ExecuteNonQuery();
       Close();
       }
@@ -636,7 +636,7 @@ namespace Class_db_field_situations
       + DELIMITER
       + " drop procedure if exists " + procedure_name;
       var my_sql_script = new MySqlScript();
-      my_sql_script.Connection = connection;
+      my_sql_script.Connection = Connection;
       my_sql_script.Delimiter = DELIMITER;
       my_sql_script.Query = code;
       Open();
@@ -653,7 +653,7 @@ namespace Class_db_field_situations
         "SELECT *"
         + " FROM field_situation"
         + " where id = '" + id + "'",
-        connection
+        Connection
         );
       var dr = my_sql_command.ExecuteReader();
       dr.Read();

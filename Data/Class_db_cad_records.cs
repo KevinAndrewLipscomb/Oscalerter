@@ -41,7 +41,7 @@ namespace Class_db_cad_records
         +   " left join cad_record on (cad_record.incident_address=radio_dispatch.address and cad_record.call_sign=capcode_unit_map.unit)"
         + " where cad_record.id is null"
         +   " and transmission_datetime > GREATEST((select min(TIMESTAMP(incident_date,time_initialized)) from cad_record where be_current),DATE_SUB(NOW(),INTERVAL 3 HOUR))",
-        connection
+        Connection
         );
       my_sql_command.ExecuteNonQuery();
       Close();
@@ -53,7 +53,7 @@ namespace Class_db_cad_records
       Open();
       try
         {
-        using var my_sql_command = new MySqlCommand(db_trail.Saved("delete from cad_record where id = \"" + id + "\""), connection);
+        using var my_sql_command = new MySqlCommand(db_trail.Saved("delete from cad_record where id = \"" + id + "\""), Connection);
         my_sql_command.ExecuteNonQuery();
         }
       catch(Exception e)
@@ -103,7 +103,7 @@ namespace Class_db_cad_records
       var result = false;
       //
       Open();
-      using var my_sql_command = new MySqlCommand("select * from cad_record where CAST(id AS CHAR) = \"" + id + "\"", connection);
+      using var my_sql_command = new MySqlCommand("select * from cad_record where CAST(id AS CHAR) = \"" + id + "\"", Connection);
       var dr = my_sql_command.ExecuteReader();
       if (dr.Read())
         {
@@ -194,7 +194,7 @@ namespace Class_db_cad_records
       + drop_procedure_clause;
       var my_sql_script = new MySqlScript()
         {
-        Connection = connection,
+        Connection = Connection,
         Delimiter = DELIMITER,
         Query = code
         };
@@ -205,7 +205,7 @@ namespace Class_db_cad_records
         }
       catch (Exception e)
         {
-        using var my_sql_command = new MySqlCommand(drop_procedure_clause,connection);
+        using var my_sql_command = new MySqlCommand(drop_procedure_clause,Connection);
         my_sql_command.ExecuteNonQuery();
         throw e;
         }
@@ -228,7 +228,7 @@ namespace Class_db_cad_records
         "SELECT *"
         + " FROM cad_record"
         + " where id = '" + id + "'",
-        connection
+        Connection
         );
       var dr = my_sql_command.ExecuteReader();
       dr.Read();
@@ -390,7 +390,7 @@ namespace Class_db_cad_records
         //
         + " delete from cad_record where incident_date < DATE_ADD(CURDATE(),INTERVAL -7 DAY)"
         ,
-        connection
+        Connection
         );
       my_sql_command.ExecuteNonQuery();
       Close();
