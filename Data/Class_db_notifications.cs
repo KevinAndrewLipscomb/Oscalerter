@@ -4,6 +4,8 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections;
 using System.Configuration;
+using System.Linq;
+using System.Text;
 
 namespace Class_db_notifications
   {
@@ -46,7 +48,18 @@ namespace Class_db_notifications
       // dr.Close();
       // Tier 1 stakeholders
       // + ' where tier_id = 1'
-      using var my_sql_command = new MySqlCommand("select email_address" + " from member" + " join role_member_map on (role_member_map.member_id=member.id)" + " join role_notification_map on (role_notification_map.role_id=role_member_map.role_id)" + " join role on (role.id=role_member_map.role_id)" + " join notification on (notification.id=role_notification_map.notification_id)" + " and notification.name = \"" + name + "\"",connection);
+      using var my_sql_command = new MySqlCommand
+        (
+        new StringBuilder()
+        .Append($"select email_address")
+        .Append($" from member")
+        .Append(  $" join role_member_map on (role_member_map.member_id=member.id)")
+        .Append(  $" join role_notification_map on (role_notification_map.role_id=role_member_map.role_id)")
+        .Append(  $" join role on (role.id=role_member_map.role_id)")
+        .Append(  $" join notification on (notification.id=role_notification_map.notification_id) and notification.name = '{name}'")
+        .ToString(),
+        Connection
+        );
       var dr = my_sql_command.ExecuteReader();
       if (dr != null)
         {
@@ -141,7 +154,7 @@ namespace Class_db_notifications
         }
       Open();
       //using var my_sql_command = new MySqlCommand("select CONCAT(phone_num,'@',hostname) as sms_target from member join sms_gateway on (sms_gateway.id=member.phone_service_id) where " + condition_clause,connection);
-      using var my_sql_command = new MySqlCommand("select CONCAT(phone_num,'@sms.clicksend.com') as sms_target from member where " + condition_clause,connection);
+      using var my_sql_command = new MySqlCommand("select CONCAT(phone_num,'@sms.clicksend.com') as sms_target from member where " + condition_clause,Connection);
       var dr = my_sql_command.ExecuteReader();
       while (dr.Read())
         {

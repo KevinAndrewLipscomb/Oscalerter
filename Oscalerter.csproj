@@ -40,7 +40,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Prefer32Bit>false</Prefer32Bit>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-    <CodeAnalysisRuleSet>..\KiDotnetFoundation\ki.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\ki\ki.ruleset</CodeAnalysisRuleSet>
     <LangVersion>preview</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
@@ -166,16 +166,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup Label="ProjectReference">
-    <ProjectReference Include="..\KiDotnetFoundation\ki.csproj">
-      <Project>{a20c347b-5154-47b9-a275-36157bf73352}</Project>
-      <Name>ki</Name>
-    </ProjectReference>
-    <ProjectReference Include="lib\oscalib\oscalib.csproj">
-      <Project>{24557ac7-3c17-4149-9a5d-e920a4c5a0e5}</Project>
-      <Name>oscalib</Name>
-    </ProjectReference>
-  </ItemGroup>
   <ItemGroup Label="PackageReference">
     <PackageReference Include="HtmlAgilityPack">
       <Version>1.11.53</Version>
@@ -192,6 +182,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup Label="ProjectReference">
+    <ProjectReference Include="..\ki\ki.csproj">
+      <Project>{a20c347b-5154-47b9-a275-36157bf73352}</Project>
+      <Name>ki</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\oscalib\oscalib.csproj">
+      <Project>{24557ac7-3c17-4149-9a5d-e920a4c5a0e5}</Project>
+      <Name>oscalib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

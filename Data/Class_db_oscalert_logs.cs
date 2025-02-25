@@ -28,7 +28,7 @@ namespace Class_db_oscalert_logs
       Open();
       try
         {
-        using var my_sql_command = new MySqlCommand(db_trail.Saved("delete from oscalert_log where id = \"" + id + "\""), connection);
+        using var my_sql_command = new MySqlCommand(db_trail.Saved("delete from oscalert_log where id = \"" + id + "\""), Connection);
         my_sql_command.ExecuteNonQuery();
         }
       catch(Exception e)
@@ -49,7 +49,7 @@ namespace Class_db_oscalert_logs
     internal void Enter(string content)
       {
       Open();
-      using var my_sql_command = new MySqlCommand("insert oscalert_log set content = '" + content + "'",connection);
+      using var my_sql_command = new MySqlCommand("insert oscalert_log set content = '" + content + "'",Connection);
       my_sql_command.ExecuteNonQuery();
       Close();
       }
@@ -66,7 +66,7 @@ namespace Class_db_oscalert_logs
       var result = false;
       //
       Open();
-      using var my_sql_command = new MySqlCommand("select * from oscalert_log where CAST(id AS CHAR) = \"" + id + "\"", connection);
+      using var my_sql_command = new MySqlCommand("select * from oscalert_log where CAST(id AS CHAR) = \"" + id + "\"", Connection);
       var dr = my_sql_command.ExecuteReader();
       if (dr.Read())
         {
@@ -107,7 +107,7 @@ namespace Class_db_oscalert_logs
         "SELECT *"
         + " FROM oscalert_log"
         + " where id = '" + id + "'",
-        connection
+        Connection
         );
       var dr = my_sql_command.ExecuteReader();
       dr.Read();
